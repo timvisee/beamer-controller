@@ -1,0 +1,7 @@
+# Configuration for Travis CI
+sudo: false
+
+language: java
+jdk: oraclejdk8
+
+script: mvn clean verify -B
