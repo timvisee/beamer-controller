@@ -9,4 +9,4 @@ test:
     - mvn clean verify -B
   post:
     - mkdir $CIRCLE_ARTIFACTS/out
-- mv target/*.jar $CIRCLE_ARTIFACTS/out
+    - mv target/*.jar $CIRCLE_ARTIFACTS/out
