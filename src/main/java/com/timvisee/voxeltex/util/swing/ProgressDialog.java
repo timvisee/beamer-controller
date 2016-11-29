@@ -1,10 +1,7 @@
 /******************************************************************************
- * Copyright (c) Child-In-Time 2016. All rights reserved.                     *
+ * Copyright (c) Tim Visee 2016. All rights reserved.                         *
  *                                                                            *
  * @author Tim Visee                                                          *
- * @author Nathan Bakhuijzen                                                  *
- * @author Timo van den Boom                                                  *
- * @author Jos van Gent                                                       *
  *                                                                            *
  * Open Source != No Copyright                                                *
  *                                                                            *
