@@ -47,8 +47,8 @@
 
     <licenses>
         <license>
-            <!--<title>The GNU General Public Licence version 3 (GPLv3)</title>-->
-            <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+            <name>The MIT License (MIT)</name>
+            <url>https://opensource.org/licenses/MIT</url>
         </license>
     </licenses>
 
