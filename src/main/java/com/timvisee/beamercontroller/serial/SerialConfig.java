@@ -22,6 +22,8 @@
 package com.timvisee.beamercontroller.serial;
 
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+import jssc.SerialPort;
+import jssc.SerialPortException;
 
 public class SerialConfig {
 
@@ -238,6 +240,29 @@ public class SerialConfig {
                 hasParityType() &&
                 hasStopBitType() &&
                 hasFlowControl();
+    }
+
+    /**
+     * Apply the serial config to a serial port.
+     *
+     * @param port Serial port to apply the configuration to.
+     *
+     * @throws SerialPortException if failed to apply to the serial port.
+     */
+    public void applyToPort(SerialPort port) throws SerialPortException {
+        // Make sure everything is configured properly
+        if(!isConfigured())
+            throw new RuntimeException("can't apply configuration to serial port, as the configuration isn't complete");
+
+        // Set the parameters
+        port.setParams(
+                this.baudRateType.getSerialConnectorValue(),
+                this.dataBitType.getSerialConnectorValue(),
+                this.stopBitType.getSerialConnectorValue(),
+                this.parityType.getSerialConnectorValue()
+        );
+
+        // TODO: Set the flow control!
     }
 
     /**
