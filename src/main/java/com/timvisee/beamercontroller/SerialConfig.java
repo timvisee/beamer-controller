@@ -21,60 +21,24 @@
 
 package com.timvisee.beamercontroller;
 
-public enum FlowControlType {
-
-    NONE(0),
-    RTSCTS_IN(1),
-    RTSCTS_OUT(2),
-    XONXOFF_IN(4),
-    XONXOFF_OUT(8);
+public class SerialConfig {
 
     /**
-     * Flow control ID.
+     * Stop bit type for this serial configuration.
      */
-    public int id;
+    private StopBitType stopBitType;
 
     /**
-     * Constructor.
-     *
-     * @param id Flow control type ID.
+     * Flow control type for this serial configuration.
      */
-    FlowControlType(int id) {
-        this.id = id;
-    }
+    private FlowControlType flowControl;
 
     /**
-     * Get the flow control ID.
+     * Get the flow control type.
      *
-     * @return Flow control type ID.
+     * @return Flow control type.
      */
-    public int getId() {
-        return this.id;
-    }
-
-    /**
-     * Get the value for jSSC.
-     *
-     * @return Value for jSSC.
-     */
-    public int getSerialConnectorValue() {
-        return this.id;
-    }
-
-    /**
-     * Get the flow control type by it's ID.
-     *
-     * @param id ID to get the flow control type for.
-     *
-     * @return The flow control type.
-     */
-    public static FlowControlType getById(int id) {
-        // Loop through the flow control types and find the correct one
-        for (FlowControlType type : values())
-            if(type.getId() == id)
-                return type;
-
-        // We haven't found anything, throw an exception
-        throw new RuntimeException("Invalid flow control type ID");
+    public FlowControlType getFlowControl() {
+        return this.flowControl;
     }
 }
