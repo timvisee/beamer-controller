@@ -73,9 +73,9 @@ public class SerialConfig {
     private StopBitType stopBitType = null;
 
     /**
-     * Flow control type for this serial configuration.
+     * Flow control configuration for this serial configuration.
      */
-    private FlowControlType flowControl = null;
+    private FlowControlConfig flowControl = FlowControlConfig.createNone();
 
     /**
      * Constructor.
@@ -86,7 +86,7 @@ public class SerialConfig {
      * @param stopBitType Stop bit type, or null.
      * @param flowControl Flow control, or null.
      */
-    public SerialConfig(BaudRateType baudRateType, DataBitType dataBitType, ParityType parityType, StopBitType stopBitType, FlowControlType flowControl) {
+    public SerialConfig(BaudRateType baudRateType, DataBitType dataBitType, ParityType parityType, StopBitType stopBitType, FlowControlConfig flowControl) {
         this.baudRateType = baudRateType;
         this.dataBitType = dataBitType;
         this.parityType = parityType;
@@ -207,7 +207,7 @@ public class SerialConfig {
      *
      * @return Flow control type.
      */
-    public FlowControlType getFlowControl() {
+    public FlowControlConfig getFlowControl() {
         return this.flowControl;
     }
 
@@ -221,11 +221,11 @@ public class SerialConfig {
     }
 
     /**
-     * Set the flow control type.
+     * Set the flow control configuration.
      *
-     * @param flowControl Flow control type.
+     * @param flowControl Flow control configuration.
      */
-    public void setFlowControl(FlowControlType flowControl) {
+    public void setFlowControl(FlowControlConfig flowControl) {
         this.flowControl = flowControl;
     }
 
@@ -287,9 +287,9 @@ public class SerialConfig {
         if(hasStopBitType())
             section.set(CONFIG_STOP_BIT_KEY, this.stopBitType.getId());
 
-        // Store the flow control type
+        // Store the flow control configuration
         if(hasFlowControl())
-            section.set(CONFIG_FLOW_CONTROL_KEY, this.flowControl.getId());
+            section.set(CONFIG_FLOW_CONTROL_KEY, this.flowControl.getValue());
     }
 
     /**
@@ -306,7 +306,7 @@ public class SerialConfig {
                 DataBitType.getById(section.getInt(CONFIG_DATA_BIT_KET, -1)),
                 ParityType.getById(section.getInt(CONFIG_PARITY_KEY, -1)),
                 StopBitType.getById(section.getInt(CONFIG_STOP_BIT_KEY, -1)),
-                FlowControlType.getById(section.getInt(CONFIG_FLOW_CONTROL_KEY, -1))
+                new FlowControlConfig(section.getInt(CONFIG_FLOW_CONTROL_KEY, -1))
         );
     }
 }
