@@ -48,3 +48,6 @@ commands:
     name: 'Source: Get source'
     type: read
     command: 'sour=?'
+
+# Supported version number for compatibility
+version: 1
