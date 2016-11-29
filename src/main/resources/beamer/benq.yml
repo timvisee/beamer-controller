@@ -1,13 +1,20 @@
 id: benq
 name: BenQ
+
+# Serial connectivity configuration
 serial:
   supported: true
-  defaults:
+  default:
     baud: 115200
     databit: 8
     parity: 0
     stopbit: 1
     flowcontrol: 0
+  interface:
+    commandPrefix: '\r*'
+    commandSuffix: '#\r'
+
+# Command configuration
 commands:
   powerSetOn:
     name: 'Power: On'
