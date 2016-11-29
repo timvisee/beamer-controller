@@ -53,6 +53,15 @@ public enum FlowControlType {
     }
 
     /**
+     * Get the value for jSSC.
+     *
+     * @return Value for jSSC.
+     */
+    public int getSerialConnectorValue() {
+        return this.id;
+    }
+
+    /**
      * Get the flow control type by it's ID.
      *
      * @param id ID to get the flow control type for.
