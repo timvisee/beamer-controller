@@ -11,8 +11,8 @@ serial:
     stopbit: 1
     flowcontrol: 0
   interface:
-    commandPrefix: '\r*'
-    commandSuffix: '#\r'
+    commandPrefix: "\r*"
+    commandSuffix: "#\r"
 
 # Command configuration
 commands:
