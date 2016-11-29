@@ -25,7 +25,7 @@ import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-public class SerialConfig implements Clonable {
+public class SerialConfig implements Cloneable {
 
     /**
      * Configuration key for the baud rate property.
