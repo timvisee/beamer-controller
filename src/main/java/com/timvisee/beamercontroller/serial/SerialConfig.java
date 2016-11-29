@@ -256,10 +256,10 @@ public class SerialConfig {
 
         // Set the parameters
         port.setParams(
-                this.baudRateType.getSerialConnectorValue(),
-                this.dataBitType.getSerialConnectorValue(),
-                this.stopBitType.getSerialConnectorValue(),
-                this.parityType.getSerialConnectorValue()
+                this.baudRateType.toJsscValue(),
+                this.dataBitType.toJsscValue(),
+                this.stopBitType.toJsscValue(),
+                this.parityType.toJsscValue()
         );
 
         // TODO: Set the flow control!

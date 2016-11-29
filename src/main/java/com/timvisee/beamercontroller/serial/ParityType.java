@@ -54,11 +54,11 @@ public enum ParityType {
     }
 
     /**
-     * Get the value for jSSC.
+     * Get the corresponding jSSC value.
      *
-     * @return Value for jSSC.
+     * @return Corresponding jSSC value.
      */
-    public int getSerialConnectorValue() {
+    public int toJsscValue() {
         return this.id;
     }
 
