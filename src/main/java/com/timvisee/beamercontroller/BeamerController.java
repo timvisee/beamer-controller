@@ -24,11 +24,27 @@ package com.timvisee.beamercontroller;
 public class BeamerController {
 
     /**
+     * Application name.
+     */
+    public static final String APP_NAME = "BeamerController";
+
+    /**
+     * Application version name.
+     */
+    public static final String APP_VERSION_NAME = "0.1-Alpha";
+
+    /**
+     * Application version code.
+     */
+    public static final int APP_VERSION_CODE = 1;
+
+    /**
      * Main method, called on start.
      *
      * @param args Program arguments.
      */
     public static void main(String[] args) {
-        System.out.println("Started BeamerController.");
+        // The application has started, show a status message
+        System.out.println("Started " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
     }
 }
