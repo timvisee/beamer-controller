@@ -34,6 +34,11 @@ public class SerialConfig {
     private DataBitType dataBitType;
 
     /**
+     * parity type for this serial configuration.
+     */
+    private ParityType parityType;
+
+    /**
      * Stop bit type for this serial configuration.
      */
     private StopBitType stopBitType;
@@ -59,6 +64,15 @@ public class SerialConfig {
      */
     public DataBitType getDataBitType() {
         return this.dataBitType;
+    }
+
+    /**
+     * Get the parity type.
+     *
+     * @return Parity type.
+     */
+    public ParityType getParityType() {
+        return this.parityType;
     }
 
     /**
