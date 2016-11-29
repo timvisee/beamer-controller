@@ -19,63 +19,60 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.                *
  ******************************************************************************/
 
-package com.timvisee.beamercontroller;
+package com.timvisee.beamercontroller.serial;
 
-public class SerialConfig {
+public enum StopBitType {
+
+    STOPBIT_1(1),
+    STOPBIT_2(2),
+    STOPBIT_1_5(3);
 
     /**
-     * Baud rate type for this serial configuration.
+     * Type ID.
      */
-    public BaudRateType baudRateType;
+    public int id;
 
     /**
-     * Data bit type for this serial configuration.
-     */
-    private DataBitType dataBitType;
-
-    /**
-     * Stop bit type for this serial configuration.
-     */
-    private StopBitType stopBitType;
-
-    /**
-     * Flow control type for this serial configuration.
-     */
-    private FlowControlType flowControl;
-
-    /**
-     * Get the baud rate type.
+     * Constructor.
      *
-     * @return Baud rate type.
+     * @param id Stop bit ID.
      */
-    public BaudRateType getBaudRateType() {
-        return this.baudRateType;
+    StopBitType(int id) {
+        this.id = id;
     }
 
     /**
-     * Get the data bit type.
+     * Get the stop bit ID.
      *
-     * @return Data bit type.
+     * @return Stop bit ID
      */
-    public DataBitType getDataBitType() {
-        return this.dataBitType;
+    public int getId() {
+        return this.id;
     }
 
     /**
-     * Get the stop bit type.
+     * Get the value for jSSC.
+     *
+     * @return Value for jSSC.
+     */
+    public int getSerialConnectorValue() {
+        return this.id;
+    }
+
+    /**
+     * Find the stop bit type by it's ID.
+     *
+     * @param id Stop bit type ID.
      *
      * @return Stop bit type.
      */
-    public StopBitType getStopBitType() {
-        return this.stopBitType;
-    }
+    public static StopBitType getById(int id) {
+        // Loop through the types and return the one with the same ID
+        for(StopBitType type : values())
+            if(type.getId() == id)
+                return type;
 
-    /**
-     * Get the flow control type.
-     *
-     * @return Flow control type.
-     */
-    public FlowControlType getFlowControl() {
-        return this.flowControl;
+        // We haven't found anything, throw an exception
+        throw new RuntimeException("Invalid stop bit type ID");
     }
 }

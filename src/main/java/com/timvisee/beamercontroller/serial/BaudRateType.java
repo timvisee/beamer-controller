@@ -19,7 +19,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.                *
  ******************************************************************************/
 
-package com.timvisee.beamercontroller;
+package com.timvisee.beamercontroller.serial;
 
 public enum BaudRateType {
 
