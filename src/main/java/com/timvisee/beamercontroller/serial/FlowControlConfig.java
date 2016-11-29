@@ -22,6 +22,9 @@
 
 package com.timvisee.beamercontroller.serial;
 
+import jssc.SerialPort;
+import jssc.SerialPortException;
+
 public class FlowControlConfig {
 
     /**
@@ -245,5 +248,16 @@ public class FlowControlConfig {
             this.value |= FLOWCONTROL_XONXOFF_OUT;
         else
             this.value = ~(~this.value | ~FLOWCONTROL_XONXOFF_OUT);
+    }
+
+    /**
+     * Apply the flow control configuration to a serial port instance.
+     *
+     * @param port Serial port instance to apply to.
+     *
+     * @throws SerialPortException when applying the flow control mode failed.
+     */
+    public void applyToPort(SerialPort port) throws SerialPortException {
+        port.setFlowControlMode(getValue());
     }
 }

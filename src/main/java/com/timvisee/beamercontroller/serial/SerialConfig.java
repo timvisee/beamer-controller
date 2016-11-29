@@ -262,7 +262,8 @@ public class SerialConfig {
                 this.parityType.toJsscValue()
         );
 
-        // TODO: Set the flow control!
+        // Apply the flow control configuration
+        this.flowControl.applyToPort(port);
     }
 
     /**
