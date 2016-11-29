@@ -1,0 +1,8 @@
+id: benq
+name: BenQ
+serial:
+  baud: 115200
+  databit: 8
+  parity:
+  stopbit: 1
+  flowcontrol: 0
