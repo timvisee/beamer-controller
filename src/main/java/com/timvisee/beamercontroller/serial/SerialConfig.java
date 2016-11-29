@@ -290,7 +290,7 @@ public class SerialConfig {
 
         // Store the flow control configuration
         if(hasFlowControl())
-            section.set(CONFIG_FLOW_CONTROL_KEY, this.flowControl.getValue());
+            section.set(CONFIG_FLOW_CONTROL_KEY, this.flowControl.getMask());
     }
 
     /**

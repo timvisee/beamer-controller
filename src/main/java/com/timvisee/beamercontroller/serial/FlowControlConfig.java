@@ -53,9 +53,9 @@ public class FlowControlConfig {
     private static final int FLOWCONTROL_XONXOFF_OUT = 8;
 
     /**
-     * Value defining the flow control
+     * Mask value defining the flow control
      */
-    private int value = 0;
+    private int mask = 0;
 
     /**
      * Constructor.
@@ -66,10 +66,10 @@ public class FlowControlConfig {
     /**
      * Constructor.
      *
-     * @param value Flow control value.
+     * @param mask Flow control mask.
      */
-    public FlowControlConfig(int value) {
-        setValue(value);
+    public FlowControlConfig(int mask) {
+        setMask(mask);
     }
 
     /**
@@ -82,44 +82,44 @@ public class FlowControlConfig {
     }
 
     /**
-     * Get the flow control value.
+     * Get the flow control mask.
      *
-     * @return Flow control value.
+     * @return Flow control mask.
      */
-    public int getValue() {
-        return this.value;
+    public int getMask() {
+        return this.mask;
     }
 
     /**
-     * Set the flow control by a value.
+     * Set the flow control by a mask.
      *
-     * @param value Value.
+     * @param mask Value.
      */
-    public void setValue(int value) {
+    public void setMask(int mask) {
         // Make sure the number is in-bound
-        if(value < 0 || value >= FLOWCONTROL_XONXOFF_OUT * 2)
-            throw new RuntimeException("Invalid flow control value");
+        if(mask < 0 || mask >= FLOWCONTROL_XONXOFF_OUT * 2)
+            throw new RuntimeException("Invalid flow control mask");
 
-        // Set the actual value
-        this.value = value;
+        // Set the actual mask
+        this.mask = mask;
     }
 
     /**
-     * Get the jSSC flow control value.
+     * Get the jSSC flow control mask.
      *
-     * @return jSSC flow control value.
+     * @return jSSC flow control mask.
      */
     public int getJsscValue() {
-        return getValue();
+        return getMask();
     }
 
     /**
-     * Set the flow control by a jSSC flow control value.
+     * Set the flow control by a jSSC flow control mask.
      *
-     * @param value jSSC flow control value.
+     * @param value jSSC flow control mask.
      */
     public void setJsscValue(int value) {
-        setValue(value);
+        setMask(value);
     }
 
     /**
@@ -128,14 +128,14 @@ public class FlowControlConfig {
      * @return True if the flow control is none.
      */
     public boolean isNone() {
-        return this.value == FLOWCONTROL_NONE;
+        return this.mask == FLOWCONTROL_NONE;
     }
 
     /**
      * Set the flow control to none.
      */
     public void setNone() {
-        this.value = FLOWCONTROL_NONE;
+        this.mask = FLOWCONTROL_NONE;
     }
 
     /**
@@ -144,7 +144,7 @@ public class FlowControlConfig {
      * @return True if enabled, false if not.
      */
     public boolean isRtsCtsIn() {
-        return (this.value & FLOWCONTROL_RTSCTS_IN) > 0;
+        return (this.mask & FLOWCONTROL_RTSCTS_IN) > 0;
     }
 
     /**
@@ -161,9 +161,9 @@ public class FlowControlConfig {
      */
     public void setRtsCtsIn(boolean enabled) {
         if(enabled)
-            this.value |= FLOWCONTROL_RTSCTS_IN;
+            this.mask |= FLOWCONTROL_RTSCTS_IN;
         else
-            this.value = ~(~this.value | ~FLOWCONTROL_RTSCTS_IN);
+            this.mask = ~(~this.mask | ~FLOWCONTROL_RTSCTS_IN);
     }
 
     /**
@@ -172,7 +172,7 @@ public class FlowControlConfig {
      * @return True if enabled, false if not.
      */
     public boolean isRtsCtsOut() {
-        return (this.value & FLOWCONTROL_RTSCTS_OUT) > 0;
+        return (this.mask & FLOWCONTROL_RTSCTS_OUT) > 0;
     }
 
     /**
@@ -189,9 +189,9 @@ public class FlowControlConfig {
      */
     public void setRtsCtsOut(boolean enabled) {
         if(enabled)
-            this.value |= FLOWCONTROL_RTSCTS_OUT;
+            this.mask |= FLOWCONTROL_RTSCTS_OUT;
         else
-            this.value = ~(~this.value | ~FLOWCONTROL_RTSCTS_OUT);
+            this.mask = ~(~this.mask | ~FLOWCONTROL_RTSCTS_OUT);
     }
 
     /**
@@ -200,7 +200,7 @@ public class FlowControlConfig {
      * @return True if enabled, false if not.
      */
     public boolean isXonXoffIn() {
-        return (this.value & FLOWCONTROL_XONXOFF_IN) > 0;
+        return (this.mask & FLOWCONTROL_XONXOFF_IN) > 0;
     }
 
     /**
@@ -217,9 +217,9 @@ public class FlowControlConfig {
      */
     public void setXonXoffIn(boolean enabled) {
         if(enabled)
-            this.value |= FLOWCONTROL_XONXOFF_IN;
+            this.mask |= FLOWCONTROL_XONXOFF_IN;
         else
-            this.value = ~(~this.value | ~FLOWCONTROL_XONXOFF_IN);
+            this.mask = ~(~this.mask | ~FLOWCONTROL_XONXOFF_IN);
     }
 
     /**
@@ -228,7 +228,7 @@ public class FlowControlConfig {
      * @return True if enabled, false if not.
      */
     public boolean isXonXoffOut() {
-        return (this.value & FLOWCONTROL_XONXOFF_OUT) > 0;
+        return (this.mask & FLOWCONTROL_XONXOFF_OUT) > 0;
     }
 
     /**
@@ -245,9 +245,9 @@ public class FlowControlConfig {
      */
     public void setXonXoffOut(boolean enabled) {
         if(enabled)
-            this.value |= FLOWCONTROL_XONXOFF_OUT;
+            this.mask |= FLOWCONTROL_XONXOFF_OUT;
         else
-            this.value = ~(~this.value | ~FLOWCONTROL_XONXOFF_OUT);
+            this.mask = ~(~this.mask | ~FLOWCONTROL_XONXOFF_OUT);
     }
 
     /**
@@ -258,6 +258,6 @@ public class FlowControlConfig {
      * @throws SerialPortException when applying the flow control mode failed.
      */
     public void applyToPort(SerialPort port) throws SerialPortException {
-        port.setFlowControlMode(getValue());
+        port.setFlowControlMode(getMask());
     }
 }
