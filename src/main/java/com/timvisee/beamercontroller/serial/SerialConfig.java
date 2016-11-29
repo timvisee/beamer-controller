@@ -21,7 +21,34 @@
 
 package com.timvisee.beamercontroller.serial;
 
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+
 public class SerialConfig {
+
+    /**
+     * Configuration key for the baud rate property.
+     */
+    public static final String CONFIG_BAUD_RATE_KEY = "baud";
+
+    /**
+     * Configuration key for the data bit type property.
+     */
+    public static final String CONFIG_DATA_BIT_KET = "databit";
+
+    /**
+     * Configuration key for the parity type property.
+     */
+    public static final String CONFIG_PARITY_KEY = "parity";
+
+    /**
+     * Configuration key for the stop bit type property.
+     */
+    public static final String CONFIG_STOP_BIT_KEY = "stopbit";
+
+    /**
+     * Configuration key for the flow control type property.
+     */
+    public static final String CONFIG_FLOW_CONTROL_KEY = "flowcontrol";
 
     /**
      * Baud rate type for this serial configuration.
@@ -211,5 +238,50 @@ public class SerialConfig {
                 hasParityType() &&
                 hasStopBitType() &&
                 hasFlowControl();
+    }
+
+    /**
+     * Save the serial configuration to a configuration section.
+     *
+     * @param section Configuration section to save the configuration to.
+     */
+    public void save(ConfigurationSection section) {
+        // Store the baud rate
+        if(hasBaudRateType())
+            section.set(CONFIG_BAUD_RATE_KEY, this.baudRateType.getId());
+
+        // Store the data bit type
+        if(hasDataBitType())
+            section.set(CONFIG_DATA_BIT_KET, this.dataBitType.getId());
+
+        // Store the parity type
+        if(hasParityType())
+            section.set(CONFIG_PARITY_KEY, this.parityType.getId());
+
+        // Store the stop bit type
+        if(hasStopBitType())
+            section.set(CONFIG_STOP_BIT_KEY, this.stopBitType.getId());
+
+        // Store the flow control type
+        if(hasFlowControl())
+            section.set(CONFIG_FLOW_CONTROL_KEY, this.flowControl.getId());
+    }
+
+    /**
+     * Load a serial configuration from a configuration section.
+     *
+     * @param section Configuration section to load the configuration from.
+     *
+     * @return Loaded serial configuration.
+     */
+    public SerialConfig load(ConfigurationSection section) {
+        // Construct a new serial configuration, and load all proper settings from the section
+        return new SerialConfig(
+                BaudRateType.getById(section.getInt(CONFIG_BAUD_RATE_KEY, -1)),
+                DataBitType.getById(section.getInt(CONFIG_DATA_BIT_KET, -1)),
+                ParityType.getById(section.getInt(CONFIG_PARITY_KEY, -1)),
+                StopBitType.getById(section.getInt(CONFIG_STOP_BIT_KEY, -1)),
+                FlowControlType.getById(section.getInt(CONFIG_FLOW_CONTROL_KEY, -1))
+        );
     }
 }
