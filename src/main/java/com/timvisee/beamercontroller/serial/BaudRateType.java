@@ -61,6 +61,15 @@ public enum BaudRateType {
     }
 
     /**
+     * Get the actual baud rate.
+     *
+     * @return Actual baud rate.
+     */
+    public int getBaudRate() {
+        return this.id;
+    }
+
+    /**
      * Get the value for jSSC.
      *
      * @return Value for jSSC.
@@ -68,7 +77,6 @@ public enum BaudRateType {
     public int getSerialConnectorValue() {
         return this.id;
     }
-
 
     /**
      * Get the baud rate type by it's ID.
@@ -85,5 +93,16 @@ public enum BaudRateType {
 
         // We haven't found anything, throw an exception
         throw new RuntimeException("Invalid data bit type ID");
+    }
+
+    /**
+     * Get the proper baud rate type by it's baud rate value.
+     *
+     * @param baudRate Baud rate.
+     *
+     * @return Baud rate type.
+     */
+    public static BaudRateType getByRate(int baudRate) {
+        return getById(baudRate);
     }
 }
