@@ -25,7 +25,7 @@ package com.timvisee.beamercontroller.serial;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-public class FlowControlConfig {
+public class FlowControlConfig implements Cloneable {
 
     /**
      * No flow control.
@@ -70,6 +70,25 @@ public class FlowControlConfig {
      */
     public FlowControlConfig(int mask) {
         setMask(mask);
+    }
+
+    /**
+     * Constructor.
+     * This copies the flow control configuration from another instance.
+     *
+     * @param other Other instance to copy from.
+     */
+    public FlowControlConfig(FlowControlConfig other) {
+        copyFrom(other);
+    }
+
+    /**
+     * Copy the flow control configuration from an other instance.
+     *
+     * @param other Other instance to copy from.
+     */
+    public void copyFrom(FlowControlConfig other) {
+        this.mask = other.getMask();
     }
 
     /**
@@ -259,5 +278,10 @@ public class FlowControlConfig {
      */
     public void applyToPort(SerialPort port) throws SerialPortException {
         port.setFlowControlMode(getMask());
+    }
+
+    @Override
+    protected FlowControlConfig clone() {
+        return new FlowControlConfig(this);
     }
 }

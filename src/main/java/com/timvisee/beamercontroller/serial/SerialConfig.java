@@ -25,7 +25,7 @@ import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-public class SerialConfig {
+public class SerialConfig implements Clonable {
 
     /**
      * Configuration key for the baud rate property.
@@ -79,6 +79,12 @@ public class SerialConfig {
 
     /**
      * Constructor.
+     * This creates a serial configuration that has nothing configured.
+     */
+    public SerialConfig() {}
+
+    /**
+     * Constructor.
      *
      * @param baudRateType Baud rate type, or null.
      * @param dataBitType Data bit type, or null.
@@ -92,6 +98,29 @@ public class SerialConfig {
         this.parityType = parityType;
         this.stopBitType = stopBitType;
         this.flowControl = flowControl;
+    }
+
+    /**
+     * Constructor.
+     * This copies the serial configuration from the other instance.
+     *
+     * @param other Other instance to copy from.
+     */
+    public SerialConfig(SerialConfig other) {
+        copyFrom(other);
+    }
+
+    /**
+     * Copy the serial configuration from another instance.
+     *
+     * @param other Other instance to copy from.
+     */
+    public void copyFrom(SerialConfig other) {
+        this.baudRateType = other.baudRateType;
+        this.dataBitType = other.dataBitType;
+        this.parityType = other.parityType;
+        this.stopBitType = other.stopBitType;
+        this.flowControl = other.flowControl.clone();
     }
 
     /**
@@ -309,5 +338,10 @@ public class SerialConfig {
                 StopBitType.getById(section.getInt(CONFIG_STOP_BIT_KEY, -1)),
                 new FlowControlConfig(section.getInt(CONFIG_FLOW_CONTROL_KEY, -1))
         );
+    }
+
+    @Override
+    public SerialConfig clone() {
+        return new SerialConfig(this);
     }
 }
