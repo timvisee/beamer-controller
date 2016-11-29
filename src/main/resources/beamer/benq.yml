@@ -6,3 +6,36 @@ serial:
   parity: 0
   stopbit: 1
   flowcontrol: 0
+commands:
+  powerSetOn:
+    name: 'Power: On'
+    type: write
+    command: 'pow=on'
+  powerSetOff:
+    name: 'Power: Off'
+    type: write
+    command: 'pow=off'
+  powerGetStatus:
+    name: 'Power: Get status'
+    type: read
+    command: 'pow=?'
+  powerSetComputer:
+    name: 'Source: Computer'
+    type: write
+    command: 'sour=RGB'
+  powerSetComputer2:
+    name: 'Source: Computer 2'
+    type: write
+    command: 'sour=RGB2'
+  powerSetHdmi:
+    name: 'Source: HDMI'
+    type: write
+    command: 'sour=hdmi'
+  powerSetHdmi2:
+    name: 'Source: HDMI2'
+    type: write
+    command: 'sour=hdmi2'
+  powerGetSource:
+    name: 'Source: Get source'
+    type: read
+    command: 'sour=?'
