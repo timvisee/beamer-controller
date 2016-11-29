@@ -21,47 +21,59 @@
 
 package com.timvisee.beamercontroller;
 
-public class SerialConfig {
+public enum DataBitType {
+
+    DATABIT_5(5),
+    DATABIT_6(6),
+    DATABIT_7(7),
+    DATABIT_8(8);
 
     /**
-     * Data bit type for this serial configuration.
+     * Data bit type ID.
      */
-    private DataBitType dataBitType;
+    public int id;
 
     /**
-     * Stop bit type for this serial configuration.
+     * Constructor.
+     *
+     * @param id Data bit type ID.
      */
-    private StopBitType stopBitType;
+    DataBitType(int id) {
+        this.id = id;
+    }
 
     /**
-     * Flow control type for this serial configuration.
+     * Get the data bit type ID.
+     *
+     * @return Type ID.
      */
-    private FlowControlType flowControl;
+    public int getId() {
+        return this.id;
+    }
 
     /**
-     * Get the data bit type.
+     * Get the value for jSSC.
+     *
+     * @return Value for jSSC.
+     */
+    public int getSerialConnectorValue() {
+        return this.id;
+    }
+
+    /**
+     * Get the data bit type by it's ID.
+     *
+     * @param id ID of the data bit type.
      *
      * @return Data bit type.
      */
-    public DataBitType getDataBitType() {
-        return this.dataBitType;
-    }
+    public static DataBitType getById(int id) {
+        // Loop through the values and return the one with the same ID
+        for (DataBitType type : values())
+            if(type.getId() == id)
+                return type;
 
-    /**
-     * Get the stop bit type.
-     *
-     * @return Stop bit type.
-     */
-    public StopBitType getStopBitType() {
-        return this.stopBitType;
-    }
-
-    /**
-     * Get the flow control type.
-     *
-     * @return Flow control type.
-     */
-    public FlowControlType getFlowControl() {
-        return this.flowControl;
+        // We haven't found anything, throw an exception
+        throw new RuntimeException("Invalid data bit type ID");
     }
 }

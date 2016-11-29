@@ -50,6 +50,22 @@ public enum StopBitType {
         return this.id;
     }
 
+    /**
+     * Get the value for jSSC.
+     *
+     * @return Value for jSSC.
+     */
+    public int getSerialConnectorValue() {
+        return this.id;
+    }
+
+    /**
+     * Find the stop bit type by it's ID.
+     *
+     * @param id Stop bit type ID.
+     *
+     * @return Stop bit type.
+     */
     public static StopBitType getById(int id) {
         // Loop through the types and return the one with the same ID
         for(StopBitType type : values())
