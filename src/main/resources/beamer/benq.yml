@@ -1,11 +1,13 @@
 id: benq
 name: BenQ
 serial:
-  baud: 115200
-  databit: 8
-  parity: 0
-  stopbit: 1
-  flowcontrol: 0
+  supported: true
+  defaults:
+    baud: 115200
+    databit: 8
+    parity: 0
+    stopbit: 1
+    flowcontrol: 0
 commands:
   powerSetOn:
     name: 'Power: On'
