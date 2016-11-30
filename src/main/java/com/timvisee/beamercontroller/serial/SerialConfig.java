@@ -329,7 +329,7 @@ public class SerialConfig implements Cloneable {
      *
      * @return Loaded serial configuration.
      */
-    public SerialConfig load(ConfigurationSection section) {
+    public static SerialConfig load(ConfigurationSection section) {
         // Construct a new serial configuration, and load all proper settings from the section
         return new SerialConfig(
                 BaudRateType.getById(section.getInt(CONFIG_BAUD_RATE_KEY, -1)),
