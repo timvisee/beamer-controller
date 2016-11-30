@@ -2,10 +2,10 @@ package com.timvisee.yamlwrapper.configuration;
 
 public class Configuration extends ConfigurationSection {
 
-	public Configuration() {
-		super(null, "", null);
-	}
-	
+    public Configuration() {
+        super(null, "", null);
+    }
+
     /* /**
      * Get a list of values
      * @return List of values
