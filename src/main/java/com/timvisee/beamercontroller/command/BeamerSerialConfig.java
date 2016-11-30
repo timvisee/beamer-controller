@@ -49,12 +49,12 @@ public class BeamerSerialConfig {
     /**
      * Serial interface command prefix configuration key.
      */
-    static final String CONFIG_INTERFACE_COMMAND_PREFIX = "commandPrefix";
+    private static final String CONFIG_INTERFACE_COMMAND_PREFIX = "commandPrefix";
 
     /**
      * Serial interface command suffix configuration key.
      */
-    static final String CONFIG_INTERFACE_COMMAND_SUFFIX = "commandSuffix";
+    private static final String CONFIG_INTERFACE_COMMAND_SUFFIX = "commandSuffix";
 
     /**
      * True if serial connectivity is supported.
@@ -62,7 +62,7 @@ public class BeamerSerialConfig {
     private boolean supportSerial;
 
     /**
-     * Default serial cofigiruation for serial connectivity.
+     * Default serial configuration for serial connectivity.
      */
     private SerialConfig serialDefault;
 
