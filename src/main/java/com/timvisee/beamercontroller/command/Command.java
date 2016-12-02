@@ -23,4 +23,85 @@ package com.timvisee.beamercontroller.command;
 
 public class Command {
 
+    /**
+     * Unique command ID.
+     */
+    private String id;
+
+    /**
+     * Command name.
+     */
+    private String name;
+
+    /**
+     * Command type.
+     */
+    private CommandType commandType;
+
+    /**
+     * Constructor.
+     *
+     * @param id Command ID.
+     * @param name Command name.
+     * @param type Command type.
+     */
+    public Command(String id, String name, CommandType type) {
+        this.id = id;
+        this.name = name;
+        this.commandType = type;
+    }
+
+    /**
+     * Get the command ID.
+     *
+     * @return Command ID.
+     */
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Set the command ID.
+     *
+     * @param id Command ID.
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get the command name.
+     *
+     * @return Command name.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Set the command name.
+     *
+     * @param name Command name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Get the command type.
+     *
+     * @return Command type.
+     */
+    public CommandType getCommandType() {
+        return this.commandType;
+    }
+
+    /**
+     * Set the command type.
+     *
+     * @param commandType Command type.
+     */
+    public void setCommandType(CommandType commandType) {
+        this.commandType = commandType;
+    }
 }
