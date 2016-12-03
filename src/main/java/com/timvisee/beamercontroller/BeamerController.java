@@ -45,6 +45,10 @@ public class BeamerController {
      */
     public static void main(String[] args) {
         // The application has started, show a status message
-        System.out.println("Started " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
+        System.out.println("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
+
+        // Get the application instance, and initialize
+        App app = App.getInstance();
+        app.init();
     }
 }
