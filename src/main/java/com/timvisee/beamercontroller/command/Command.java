@@ -21,6 +21,8 @@
 
 package com.timvisee.beamercontroller.command;
 
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+
 public class Command {
 
     /**
@@ -103,5 +105,24 @@ public class Command {
      */
     public void setCommandType(CommandType commandType) {
         this.commandType = commandType;
+    }
+
+    /**
+     * Load a command from the given configuration section.
+     *
+     * @param commandSection Configuration section of the command.
+     * @return Loaded command instance.
+     */
+    public static Command load(ConfigurationSection commandSection) {
+        // Get the command ID
+        final String id = commandSection.getName();
+
+        // Fetch the name, type and command properties
+        final String name = commandSection.getString("name", "Unknown");
+        final CommandType commandType = CommandType.getById(commandSection.getString("type"));
+        final String command = commandSection.getString("command", "");
+
+        // Create a new command instance, and return it
+        return new Command(id, name, commandType);
     }
 }
