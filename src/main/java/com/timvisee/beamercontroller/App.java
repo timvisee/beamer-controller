@@ -48,7 +48,7 @@ public class App {
      */
     public static App getInstance() {
         // Return the instance if it exists
-        if(instance !== null)
+        if(instance != null)
             return instance;
 
         // Create a new instance, and return it
