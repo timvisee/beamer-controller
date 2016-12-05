@@ -41,16 +41,23 @@ public class Command {
     private CommandType commandType;
 
     /**
+     * The actual command to send.
+     */
+    private String command;
+
+    /**
      * Constructor.
      *
      * @param id Command ID.
      * @param name Command name.
      * @param type Command type.
+     * #param command Command.
      */
-    public Command(String id, String name, CommandType type) {
+    public Command(String id, String name, CommandType type, String command) {
         this.id = id;
         this.name = name;
         this.commandType = type;
+        this.command = command;
     }
 
     /**
@@ -108,6 +115,24 @@ public class Command {
     }
 
     /**
+     * Get the command.
+     *
+     * @return Command.
+     */
+    public String getCommand() {
+        return this.command;
+    }
+
+    /**
+     * Set the command.
+     *
+     * @param command Command.
+     */
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
+    /**
      * Load a command from the given configuration section.
      *
      * @param commandSection Configuration section of the command.
@@ -123,6 +148,6 @@ public class Command {
         final String command = commandSection.getString("command", "");
 
         // Create a new command instance, and return it
-        return new Command(id, name, commandType);
+        return new Command(id, name, commandType, command);
     }
 }
