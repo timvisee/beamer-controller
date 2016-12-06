@@ -22,6 +22,8 @@
 
 package com.timvisee.beamercontroller.beamer;
 
+import com.timvisee.beamercontroller.serial.SerialConfig;
+
 public class Beamer {
 
     /**
@@ -35,14 +37,21 @@ public class Beamer {
     private String name;
 
     /**
+     * Default serial configuration for this beamer.
+     */
+    private SerialConfig defaultSerialConfig;
+
+    /**
      * Constructor.
      *
      * @param id Beamer id.
      * @param name Beamer name.
+     * @param defaultSerialConfig Default serial configuration for this configuration.
      */
-    public Beamer(String id, String name) {
+    public Beamer(String id, String name, SerialConfig defaultSerialConfig) {
         this.id = id;
         this.name = name;
+        this.defaultSerialConfig = defaultSerialConfig;
     }
 
     /**
@@ -61,5 +70,14 @@ public class Beamer {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Default serial configuration.
+     *
+     * @return Default serial configuration.
+     */
+    public SerialConfig getDefaultSerialConfig() {
+        return this.defaultSerialConfig;
     }
 }
