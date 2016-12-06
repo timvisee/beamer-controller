@@ -5,7 +5,7 @@ name: BenQ
 interfaces:
   # Serial interface configuration
   serial:
-    default:
+    config:
       baud: 115200
       databit: 8
       parity: 0
