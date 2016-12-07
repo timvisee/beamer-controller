@@ -22,7 +22,7 @@
 
 package com.timvisee.beamercontroller.beamer;
 
-import com.timvisee.beamercontroller.serial.SerialConfig;
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 
 public class Beamer {
 
@@ -37,21 +37,14 @@ public class Beamer {
     private String name;
 
     /**
-     * Default serial configuration for this beamer.
-     */
-    private SerialConfig defaultSerialConfig;
-
-    /**
      * Constructor.
      *
      * @param id Beamer id.
      * @param name Beamer name.
-     * @param defaultSerialConfig Default serial configuration for this configuration.
      */
-    public Beamer(String id, String name, SerialConfig defaultSerialConfig) {
+    public Beamer(String id, String name) {
         this.id = id;
         this.name = name;
-        this.defaultSerialConfig = defaultSerialConfig;
     }
 
     /**
@@ -72,12 +65,20 @@ public class Beamer {
         return this.name;
     }
 
+
     /**
-     * Default serial configuration.
+     * Load the beamer from the given configuration section.
      *
-     * @return Default serial configuration.
+     * @param beamerSection Configuration section to load the beamer from.
+     *
+     * @return Loaded beamer.
      */
-    public SerialConfig getDefaultSerialConfig() {
-        return this.defaultSerialConfig;
+    public static Beamer load(ConfigurationSection beamerSection) {
+        // Get the beamer ID and name
+        final String id = beamerSection.getString("id");
+        final String name = beamerSection.getString("name", "Unknown beamer");
+
+        // Create a beamer instance, and return it
+        return new Beamer(id, name);
     }
 }
