@@ -22,12 +22,64 @@
 
 package com.timvisee.beamercontroller.beamer.iface;
 
+import com.timvisee.yamlwrapper.configuration.Configuration;
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+
 public class SerialBeamerInterface extends BeamerInterface {
+
+    /**
+     * Command prefix.
+     */
+    private String commandPrefix = "";
+
+    /**
+     * Command suffix.
+     */
+    private String commandSuffix = "";
 
     /**
      * Constructor.
      */
-    public SerialBeamerInterface() {
+    public SerialBeamerInterface(String commandPrefix, String commandSuffix) {
+        // Construct the super
         super(InterfaceType.SERIAL);
+
+        // Set the command prefix/suffix
+        this.commandPrefix = commandPrefix;
+        this.commandSuffix = commandSuffix;
+    }
+
+    /**
+     * Command prefix.
+     *
+     * @return Command prefix.
+     */
+    public String getCommandPrefix() {
+        return this.commandPrefix;
+    }
+
+    /**
+     * Command suffix.
+     *
+     * @return Command suffix.
+     */
+    public String getCommandSuffix() {
+        return this.commandSuffix;
+    }
+
+    /**
+     * Load a serial beamer interface from the given configuration section.
+     *
+     * @param config Configuration section to load the serial beamer interface from.
+     *
+     * @return Serial beamer interface instance.
+     */
+    public static SerialBeamerInterface load(ConfigurationSection config) {
+        // Get the command prefix/suffix
+        final String commandPrefix = config.getString("commandPrefix", "");
+        final String commandSuffix = config.getString("commandSuffix", "");
+
+        // Create a new serial beamer interface instance and return it
+        return new SerialBeamerInterface(commandPrefix, commandSuffix);
     }
 }
