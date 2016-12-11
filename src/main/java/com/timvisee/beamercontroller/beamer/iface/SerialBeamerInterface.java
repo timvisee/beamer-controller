@@ -22,7 +22,7 @@
 
 package com.timvisee.beamercontroller.beamer.iface;
 
-import com.timvisee.yamlwrapper.configuration.Configuration;
+import com.timvisee.beamercontroller.serial.SerialConfig;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 
 public class SerialBeamerInterface extends BeamerInterface {
@@ -38,15 +38,25 @@ public class SerialBeamerInterface extends BeamerInterface {
     private String commandSuffix = "";
 
     /**
-     * Constructor.
+     * Serial configuration.
      */
-    public SerialBeamerInterface(String commandPrefix, String commandSuffix) {
+    private SerialConfig serialConfig;
+
+    /**
+     * Constructor.
+     *
+     * @param commandPrefix Command prefix.
+     * @param commandSuffix Command suffix.
+     * @param serialConfig Serial configuration.
+     */
+    public SerialBeamerInterface(String commandPrefix, String commandSuffix, SerialConfig serialConfig) {
         // Construct the super
         super(InterfaceType.SERIAL);
 
         // Set the command prefix/suffix
         this.commandPrefix = commandPrefix;
         this.commandSuffix = commandSuffix;
+        this.serialConfig = serialConfig;
     }
 
     /**
@@ -68,6 +78,15 @@ public class SerialBeamerInterface extends BeamerInterface {
     }
 
     /**
+     * Serial configuration.
+     *
+     * @return Serial configuration.
+     */
+    public SerialConfig getSerialConfig() {
+        return this.serialConfig;
+    }
+
+    /**
      * Load a serial beamer interface from the given configuration section.
      *
      * @param config Configuration section to load the serial beamer interface from.
@@ -79,7 +98,10 @@ public class SerialBeamerInterface extends BeamerInterface {
         final String commandPrefix = config.getString("commandPrefix", "");
         final String commandSuffix = config.getString("commandSuffix", "");
 
+        // Load the serial configuration
+        final SerialConfig serialConfig = SerialConfig.load(config.getSection("portConfig"));
+
         // Create a new serial beamer interface instance and return it
-        return new SerialBeamerInterface(commandPrefix, commandSuffix);
+        return new SerialBeamerInterface(commandPrefix, commandSuffix, serialConfig);
     }
 }
