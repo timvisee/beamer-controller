@@ -22,6 +22,7 @@
 
 package com.timvisee.beamercontroller.beamer;
 
+import com.timvisee.beamercontroller.beamer.iface.BeamerInterfaceManager;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 
 public class Beamer {
@@ -35,6 +36,11 @@ public class Beamer {
      * Beamer type name.
      */
     private String name;
+
+    /**
+     * Beamer interface manager.
+     */
+    private BeamerInterfaceManager beamerInterfaceManager;
 
     /**
      * Constructor.
@@ -65,6 +71,14 @@ public class Beamer {
         return this.name;
     }
 
+    /**
+     * Get the beamer interface manager.
+     *
+     * @return Beamer interface manager.
+     */
+    public BeamerInterfaceManager getBeamerInterfaceManager() {
+        return this.beamerInterfaceManager;
+    }
 
     /**
      * Load the beamer from the given configuration section.
@@ -77,6 +91,8 @@ public class Beamer {
         // Get the beamer ID and name
         final String id = beamerSection.getString("id");
         final String name = beamerSection.getString("name", "Unknown beamer");
+
+        // TODO: Load the beamer interface manager!
 
         // Create a beamer instance, and return it
         return new Beamer(id, name);
