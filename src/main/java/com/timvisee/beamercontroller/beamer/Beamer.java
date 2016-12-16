@@ -40,7 +40,7 @@ public class Beamer {
     /**
      * Beamer interface manager.
      */
-    private BeamerInterfaceManager beamerInterfaceManager;
+    private BeamerInterfaceManager beamerInterfaceManager = new BeamerInterfaceManager();
 
     /**
      * Constructor.
@@ -92,9 +92,13 @@ public class Beamer {
         final String id = beamerSection.getString("id");
         final String name = beamerSection.getString("name", "Unknown beamer");
 
-        // TODO: Load the beamer interface manager!
+        // Create a new beamer instance
+        Beamer beamer = new Beamer(id, name);
 
-        // Create a beamer instance, and return it
-        return new Beamer(id, name);
+        // Load the beamer interfaces
+        beamer.beamerInterfaceManager.load(beamerSection.getConfigurationSection("interfaces"));
+
+        // Return the beamer instance
+        return beamer;
     }
 }
