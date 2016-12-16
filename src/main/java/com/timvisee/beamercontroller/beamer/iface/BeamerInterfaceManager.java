@@ -22,6 +22,8 @@
 
 package com.timvisee.beamercontroller.beamer.iface;
 
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +46,19 @@ public class BeamerInterfaceManager {
      */
     public List<BeamerInterface> getInterfaces() {
         return this.interfaces;
+    }
+
+    /**
+     * Load the beamer interfaces from the given configuration section.
+     *
+     * @param interfaceSection Interface configuration section.
+     */
+    public void load(ConfigurationSection interfaceSection) {
+        // Clear the list of loaded interfaces
+        this.interfaces.clear();
+
+        // Load the serial interface configuration if configured
+        if(interfaceSection.isConfigurationSection("serial"))
+            this.interfaces.add(SerialBeamerInterface.load(interfaceSection.getConfigurationSection("serial")));
     }
 }
