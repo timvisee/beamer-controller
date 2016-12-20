@@ -22,6 +22,8 @@
 
 package com.timvisee.beamercontroller.command;
 
+import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +55,18 @@ public class CommandManager {
      */
     public int getCommandsCount() {
         return this.commands.size();
+    }
+
+    /**
+     * Load the commands from the configuration.
+     */
+    public void load(ConfigurationSection commandsSection) {
+        // Clear the list of loaded commands
+        this.commands.clear();
+
+        // Loop through the keys available in the commands section
+        for(String key : commandsSection.getKeys(""))
+            // Get the command section, load the command, and add it to the list
+            this.commands.add(Command.load(commandsSection.getSection("key")));
     }
 }
