@@ -68,6 +68,7 @@
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources/</directory>
+                <targetPath>res</targetPath>
             </resource>
         </resources>
         <plugins>
