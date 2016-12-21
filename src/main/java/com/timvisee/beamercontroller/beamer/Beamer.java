@@ -23,6 +23,7 @@
 package com.timvisee.beamercontroller.beamer;
 
 import com.timvisee.beamercontroller.beamer.iface.BeamerInterfaceManager;
+import com.timvisee.beamercontroller.command.CommandManager;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 
 public class Beamer {
@@ -41,6 +42,11 @@ public class Beamer {
      * Beamer interface manager.
      */
     private BeamerInterfaceManager beamerInterfaceManager = new BeamerInterfaceManager();
+
+    /**
+     * Command manager.
+     */
+    private CommandManager commandManager;
 
     /**
      * Constructor.
@@ -97,6 +103,9 @@ public class Beamer {
 
         // Load the beamer interfaces
         beamer.beamerInterfaceManager.load(beamerSection.getConfigurationSection("interfaces"));
+
+        // Load the beamer commands
+        beamer.commandManager.load(beamerSection.getConfigurationSection("commands"));
 
         // Return the beamer instance
         return beamer;

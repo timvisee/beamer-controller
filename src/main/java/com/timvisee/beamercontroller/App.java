@@ -22,19 +22,12 @@
 
 package com.timvisee.beamercontroller;
 
-import com.timvisee.beamercontroller.command.CommandManager;
-
 public class App {
 
     /**
      * Singleton instance.
      */
     private static App instance = null;
-
-    /**
-     * Command manager.
-     */
-    private CommandManager commandManager;
 
     /**
      * Constructor.
@@ -63,6 +56,5 @@ public class App {
      */
     public void init() {
         // TODO: Implement initialization code here!
-        // TODO: Load the command manager.
     }
 }
