@@ -23,9 +23,7 @@
 package com.timvisee.beamercontroller.beamer;
 
 import com.timvisee.beamercontroller.ResourceManager;
-import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +94,6 @@ public class BeamerManager {
         }
 
         // Show a status message
-        System.out.println("Loaded " + getBeamerCount() + " beamer configurations.");
+        System.out.println("Loaded " + getBeamerCount() + " beamer configuration" + (getBeamerCount() != 1 ? "s" : "") + ".");
     }
 }
