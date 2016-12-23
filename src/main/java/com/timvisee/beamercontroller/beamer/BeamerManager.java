@@ -77,14 +77,8 @@ public class BeamerManager {
         // Load the resource files, and parse them as configuration
         for(String beamerPath : beamerPaths) {
             try {
-                // Get the resource as file
-                final File beamerFile = ResourceManager.getFile(beamerPath);
-
-                // Load the configuration
-                YamlConfiguration beamerConfig = YamlConfiguration.loadConfiguration(beamerFile);
-
-                // Parse the beamer from the configuration
-                final Beamer beamer = Beamer.load(beamerConfig);
+                // Load bundled beamer configuration, and parse it as beamer
+                final Beamer beamer = Beamer.load(ResourceManager.loadConfig(beamerPath));
 
                 // Add the beamer to the list
                 this.beamers.add(beamer);

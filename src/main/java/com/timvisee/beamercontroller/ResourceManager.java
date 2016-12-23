@@ -22,6 +22,8 @@
 
 package com.timvisee.beamercontroller;
 
+import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
+
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -55,5 +57,19 @@ public class ResourceManager {
      */
     public static File getFile(String path) throws URISyntaxException {
         return new File(getFileUri(path));
+    }
+
+    /**
+     * Load a configuration file from the bundled resources.
+     *
+     * @param path File path.
+     *
+     * @return Loaded configuration file, or null if loading failed.
+     *
+     * @throws URISyntaxException Throws if the path is invalid.
+     */
+    public static YamlConfiguration loadConfig(String path) throws URISyntaxException {
+        // Try to load the configuration and return it
+        return YamlConfiguration.loadConfiguration(getFile(path));
     }
 }
