@@ -22,6 +22,11 @@
 
 package com.timvisee.beamercontroller.beamer;
 
+import com.timvisee.beamercontroller.ResourceManager;
+import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
+
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +49,59 @@ public class BeamerManager {
      */
     public List<Beamer> getBeamers() {
         return this.beamers;
+    }
+
+    /**
+     * Get the number of loaded beamer configurations.
+     *
+     * @return Number of loaded beamer configurations.
+     */
+    public int getBeamerCount() {
+        return this.beamers.size();
+    }
+
+    /**
+     * Load the beamers.
+     */
+    public void load() {
+        // Clear the list of beamers
+        this.beamers.clear();
+
+        // Create a list of bundled resources paths for files defining beamer types
+        List<String> beamerPaths = new ArrayList<>();
+
+        // Manually add beamer configuration files
+        // TODO: Scan the bundled resources for beamer types, instead of adding it manually!
+        beamerPaths.add("beamer/benq.yml");
+
+        // Load the resource files, and parse them as configuration
+        for(String beamerPath : beamerPaths) {
+            try {
+                // Get the resource as file
+                final File beamerFile = ResourceManager.getFile(beamerPath);
+
+                // Load the configuration
+                YamlConfiguration beamerConfig = YamlConfiguration.loadConfiguration(beamerFile);
+
+                // Parse the beamer from the configuration
+                final Beamer beamer = Beamer.load(beamerConfig);
+
+                // Add the beamer to the list
+                this.beamers.add(beamer);
+
+                // Show a status message
+                System.out.println("Loaded beamer configuration: " + beamer.getName());
+
+            } catch(URISyntaxException e) {
+                // Show an error message
+                System.out.println("Failed to load beamer configuration: " + beamerPath);
+
+                // Print the stack trace
+                e.printStackTrace();
+            }
+        }
+
+        // Show a status message
+        System.out.println("Loaded " + getBeamerCount() + " beamer configurations.");
     }
 }
