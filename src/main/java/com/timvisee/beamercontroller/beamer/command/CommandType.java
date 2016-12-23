@@ -20,7 +20,7 @@
  *
  */
 
-package com.timvisee.beamercontroller.command;
+package com.timvisee.beamercontroller.beamer.command;
 
 public enum CommandType {
 

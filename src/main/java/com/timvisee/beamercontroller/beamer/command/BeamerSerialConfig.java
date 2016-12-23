@@ -19,7 +19,7 @@
  * program. If not, see <http://opensource.org/licenses/MIT/>.                *
  ******************************************************************************/
 
-package com.timvisee.beamercontroller.command;
+package com.timvisee.beamercontroller.beamer.command;
 
 import com.timvisee.beamercontroller.serial.SerialConfig;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;

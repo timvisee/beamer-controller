@@ -23,7 +23,7 @@
 package com.timvisee.beamercontroller.beamer;
 
 import com.timvisee.beamercontroller.beamer.iface.BeamerInterfaceManager;
-import com.timvisee.beamercontroller.command.CommandManager;
+import com.timvisee.beamercontroller.beamer.command.CommandManager;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 
 public class Beamer {
