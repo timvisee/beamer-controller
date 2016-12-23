@@ -22,12 +22,19 @@
 
 package com.timvisee.beamercontroller;
 
+import com.timvisee.beamercontroller.beamer.BeamerManager;
+
 public class App {
 
     /**
      * Singleton instance.
      */
     private static App instance = null;
+
+    /**
+     * Beamer manager.
+     */
+    private BeamerManager beamerManager = new BeamerManager();
 
     /**
      * Constructor.
@@ -55,6 +62,7 @@ public class App {
      * Initialize the application.
      */
     public void init() {
-        // TODO: Implement initialization code here!
+        // Load the beamer types
+        beamerManager.load();
     }
 }
