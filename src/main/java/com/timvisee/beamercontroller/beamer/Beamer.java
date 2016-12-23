@@ -46,7 +46,7 @@ public class Beamer {
     /**
      * Command manager.
      */
-    private CommandManager commandManager;
+    private CommandManager commandManager = new CommandManager();
 
     /**
      * Constructor.
