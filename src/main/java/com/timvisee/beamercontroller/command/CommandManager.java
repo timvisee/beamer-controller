@@ -67,6 +67,6 @@ public class CommandManager {
         // Loop through the keys available in the commands section
         for(String key : commandsSection.getKeys(""))
             // Get the command section, load the command, and add it to the list
-            this.commands.add(Command.load(commandsSection.getSection("key")));
+            this.commands.add(Command.load(commandsSection.getConfigurationSection(key)));
     }
 }
