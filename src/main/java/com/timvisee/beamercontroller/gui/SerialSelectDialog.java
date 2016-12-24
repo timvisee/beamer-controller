@@ -23,6 +23,7 @@
 package com.timvisee.beamercontroller.gui;
 
 import com.timvisee.beamercontroller.BeamerController;
+import jssc.SerialPortList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,7 +112,7 @@ public class SerialSelectDialog extends JDialog {
         GridBagConstraints c = new GridBagConstraints();
 
         // Add a selection box
-        JComboBox selectField = new JComboBox();
+        JComboBox<String> selectField = new JComboBox<>(getPorts());
 
         // Create a button panel
         JPanel buttonPanel = new JPanel();
@@ -139,5 +140,14 @@ public class SerialSelectDialog extends JDialog {
         c.gridy = 1;
         c.anchor = GridBagConstraints.EAST;
         mainPanel.add(buttonPanel, c);
+    }
+
+    /**
+     * Get the list of serial ports that are available.
+     *
+     * @return List of ports.
+     */
+    public String[] getPorts() {
+        return SerialPortList.getPortNames();
     }
 }
