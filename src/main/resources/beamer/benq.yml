@@ -80,6 +80,54 @@ commands:
     name: 'Source: Get source'
     type: read
     command: 'sour=?'
+  pictureModeSetDynamic:
+    name: 'Picture mode: Dynamic'
+    type: write
+    command: 'appmod=dynamic'
+  pictureModeSetPresentation:
+    name: 'Picture mode: Presentation'
+    type: write
+    command: 'appmod=preset'
+  pictureModeSetSrgb:
+    name: 'Picture mode: sRGB'
+    type: write
+    command: 'appmod=srgb'
+  pictureModeSetBright:
+    name: 'Picture mode: Bright'
+    type: write
+    command: 'appmod=bright'
+  pictureModeSetLivingRoom:
+    name: 'Picture mode: Living Room'
+    type: write
+    command: 'appmod=livingroom'
+  pictureModeSetGame:
+    name: 'Picture mode: Game'
+    type: write
+    command: 'appmod=game'
+  pictureModeSetCinema:
+    name: 'Picture mode: Cinema'
+    type: write
+    command: 'appmod=cine'
+  pictureModeSetStandard:
+    name: 'Picture mode: Standard'
+    type: write
+    command: 'appmod=std'
+  pictureModeSetUser1:
+    name: 'Picture mode: User 1'
+    type: write
+    command: 'appmod=user1'
+  pictureModeSetUser2:
+    name: 'Picture mode: User 2'
+    type: write
+    command: 'appmod=user2'
+  pictureModeSetUser3:
+    name: 'Picture mode: User 3'
+    type: write
+    command: 'appmod=user3'
+  pictureModeGet:
+    name: 'Picture mode: Get mode'
+    type: read
+    command: 'appmod=?'
 
 # Supported version number for compatibility
 version: 1
