@@ -23,6 +23,7 @@
 package com.timvisee.beamercontroller;
 
 import com.timvisee.beamercontroller.beamer.BeamerManager;
+import com.timvisee.beamercontroller.gui.SerialSelectDialog;
 
 public class App {
 
@@ -64,5 +65,8 @@ public class App {
     public void init() {
         // Load the beamer types
         beamerManager.load();
+
+        // Show the serial select dialog
+        SerialSelectDialog.showDialog();
     }
 }
