@@ -24,7 +24,11 @@ package com.timvisee.beamercontroller;
 
 import com.timvisee.beamercontroller.beamer.BeamerManager;
 import com.timvisee.beamercontroller.gui.SerialSelectDialog;
+import com.timvisee.beamercontroller.util.ProgressDialog;
 import com.timvisee.beamercontroller.util.SwingUtils;
+import jssc.SerialPortList;
+
+import javax.swing.*;
 
 public class App {
 
@@ -70,7 +74,22 @@ public class App {
         // Use systems look and feel
         SwingUtils.useNativeLookAndFeel();
 
+        // Make sure enough serial ports are available
+        if(SerialPortList.getPortNames().length == 0) {
+            // Show a notification
+            JOptionPane.showMessageDialog(null, "No serial ports available to connect to. The application will now quit.", BeamerController.APP_NAME, JOptionPane.WARNING_MESSAGE);
+
+            // Exit the application
+            System.exit(0);
+        }
+
         // Show the serial select dialog
-        SerialSelectDialog.showDialog();
+        String serialPortName = SerialSelectDialog.showDialog();
+
+        // Show a progress dialog for the connection progress
+        ProgressDialog dialog = new ProgressDialog(null, BeamerController.APP_NAME, false);
+        dialog.setStatus("Connecting to beamer...");
+        dialog.setShowProgress(false);
+        dialog.setVisible(true);
     }
 }
