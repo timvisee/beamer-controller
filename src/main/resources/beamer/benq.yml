@@ -24,7 +24,7 @@ commands:
     name: 'Power: Off'
     type: write
     command: 'pow=off'
-  powerGetStatus:
+  powerGet:
     name: 'Power: Get status'
     type: read
     command: 'pow=?'
@@ -76,7 +76,7 @@ commands:
     name: 'Source: USB Reader'
     type: write
     command: 'sour=usbreader'
-  sourceGetSource:
+  sourceGet:
     name: 'Source: Get source'
     type: read
     command: 'sour=?'
