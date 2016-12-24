@@ -158,7 +158,7 @@ public class DashboardFrame extends JFrame {
         buttonPanel.add(new JLabel("Picture mode:"), c);
 
         // Link the commands to the buttons
-        createButton("On", "powerSetOn", buttonPanel, 0, 1);
+        createButton("On", "powerSetOn", buttonPanel, 0, 1, "The beamer should be starting now. This might take a while.");
         createButton("Off", "powerSetOff", buttonPanel, 0, 2);
         createButton("HDMI", "sourceSetHdmi", buttonPanel, 1, 1);
         createButton("HDMI 2", "sourceSetHdmi2", buttonPanel, 1, 2);
@@ -218,11 +218,32 @@ public class DashboardFrame extends JFrame {
      * @param y Y coordinate of the button to add.
      */
     public void createButton(String name, String commandId, JPanel buttonPanel, int x, int y) {
+        createButton(name, commandId, buttonPanel, x, y, null);
+    }
+
+    /**
+     * Create a button for the given command.
+     *
+     * @param name Name of the button.
+     * @param commandId Command ID.
+     * @param buttonPanel Button panel to add the button to.
+     * @param x X coordinate of the button to add.
+     * @param y Y coordinate of the button to add.
+     * @param message Message to show, or null to show nothing.
+     */
+    public void createButton(String name, String commandId, JPanel buttonPanel, int x, int y, String message) {
         // Create the button
         final JButton button = new JButton(name);
 
         // Link the button action
-        button.addActionListener(e -> runCommand(commandId));
+        button.addActionListener(e -> {
+            // Run the beamer command
+            runCommand(commandId);
+
+            // Show a message if set
+            if(message != null)
+                JOptionPane.showMessageDialog(this, message, BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        });
 
         // Create the grid bag constraints configuration
         GridBagConstraints c = new GridBagConstraints();
