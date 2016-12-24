@@ -138,32 +138,41 @@ public class DashboardFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
 
+        // Add group labels
+        c.gridx = 0;
+        c.gridy = 0;
+        buttonPanel.add(new JLabel("Power:"), c);
+        c.gridx = 1;
+        buttonPanel.add(new JLabel("Source:"), c);
+        c.gridx = 2;
+        buttonPanel.add(new JLabel("Picture mode:"), c);
+
         // Link the commands to the buttons
-        createButton("Power: On", "powerSetOn", buttonPanel, 0, 0);
-        createButton("Power: Off", "powerSetOff", buttonPanel, 0, 1);
-        createButton("Source: HDMI", "sourceSetHdmi", buttonPanel, 1, 0);
-        createButton("Source: HDMI 2", "sourceSetHdmi2", buttonPanel, 1, 1);
-        createButton("Source: Computer", "sourceSetComputer", buttonPanel, 1, 2);
-        createButton("Source: Computer 2", "sourceSetComputer2", buttonPanel, 1, 3);
-        createButton("Source: Component", "sourceSetComponent", buttonPanel, 1, 4);
-        createButton("Source: DVI-A", "sourceSetDviA", buttonPanel, 1,5);
-        createButton("Source: DVI-D", "sourceSetDviD", buttonPanel, 1, 6);
-        createButton("Source: Composite", "sourceSetComposite", buttonPanel, 1, 7);
-        createButton("Source: S-Video", "sourceSetSvideo", buttonPanel, 1,8);
-        createButton("Source: Network", "sourceSetNetwork", buttonPanel, 1, 9);
-        createButton("Source: USB Display", "sourceSetUsbDisplay", buttonPanel, 1, 10);
-        createButton("Source: USB Reader", "sourceSetUsbReader", buttonPanel, 1, 11);
-        createButton("Mode: Dynamic", "pictureModeSetDynamic", buttonPanel, 2, 0);
-        createButton("Mode: Presentation", "pictureModeSetPresentation", buttonPanel, 2, 1);
-        createButton("Mode: sRGB", "pictureModeSetSrgb", buttonPanel, 2, 2);
-        createButton("Mode: Bright", "pictureModeSetBright", buttonPanel, 2, 3);
-        createButton("Mode: Living Room", "pictureModeSetLivingRoom", buttonPanel, 2, 4);
-        createButton("Mode: Game", "pictureModeSetGame", buttonPanel, 2, 5);
-        createButton("Mode: Cinema", "pictureModeSetCinema", buttonPanel, 2, 6);
-        createButton("Mode: Standard", "pictureModeSetStandard", buttonPanel, 2, 7);
-        createButton("Mode: User 1", "pictureModeSetUser1", buttonPanel, 2, 8);
-        createButton("Mode: User 2", "pictureModeSetUser2", buttonPanel, 2, 9);
-        createButton("Mode: User 3", "pictureModeSetUser3", buttonPanel, 2, 10);
+        createButton("On", "powerSetOn", buttonPanel, 0, 1);
+        createButton("Off", "powerSetOff", buttonPanel, 0, 2);
+        createButton("HDMI", "sourceSetHdmi", buttonPanel, 1, 1);
+        createButton("HDMI 2", "sourceSetHdmi2", buttonPanel, 1, 2);
+        createButton("Computer", "sourceSetComputer", buttonPanel, 1, 3);
+        createButton("Computer 2", "sourceSetComputer2", buttonPanel, 1, 4);
+        createButton("Component", "sourceSetComponent", buttonPanel, 1, 5);
+        createButton("DVI-A", "sourceSetDviA", buttonPanel, 1,6);
+        createButton("DVI-D", "sourceSetDviD", buttonPanel, 1, 7);
+        createButton("Composite", "sourceSetComposite", buttonPanel, 1, 8);
+        createButton("S-Video", "sourceSetSvideo", buttonPanel, 1,9);
+        createButton("Network", "sourceSetNetwork", buttonPanel, 1, 10);
+        createButton("USB Display", "sourceSetUsbDisplay", buttonPanel, 1, 11);
+        createButton("USB Reader", "sourceSetUsbReader", buttonPanel, 1, 12);
+        createButton("Dynamic", "pictureModeSetDynamic", buttonPanel, 2, 1);
+        createButton("Presentation", "pictureModeSetPresentation", buttonPanel, 2, 2);
+        createButton("sRGB", "pictureModeSetSrgb", buttonPanel, 2, 3);
+        createButton("Bright", "pictureModeSetBright", buttonPanel, 2, 4);
+        createButton("Living Room", "pictureModeSetLivingRoom", buttonPanel, 2, 5);
+        createButton("Game", "pictureModeSetGame", buttonPanel, 2, 6);
+        createButton("Cinema", "pictureModeSetCinema", buttonPanel, 2, 7);
+        createButton("Standard", "pictureModeSetStandard", buttonPanel, 2, 8);
+        createButton("User 1", "pictureModeSetUser1", buttonPanel, 2, 9);
+        createButton("User 2", "pictureModeSetUser2", buttonPanel, 2, 10);
+        createButton("User 3", "pictureModeSetUser3", buttonPanel, 2, 11);
 
         // Show a notification
 //            JOptionPane.showMessageDialog(this, "The beamer is now turning on. This might take a while.", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
@@ -211,6 +220,7 @@ public class DashboardFrame extends JFrame {
         c.gridy = y;
         c.weightx = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(8, 0, 0, 8);
 
         // Add the button to the panel
         buttonPanel.add(button, c);
