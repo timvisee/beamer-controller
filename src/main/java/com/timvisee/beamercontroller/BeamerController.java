@@ -31,7 +31,7 @@ public class BeamerController {
     /**
      * Application version name.
      */
-    public static final String APP_VERSION_NAME = "0.1-Alpha";
+    public static final String APP_VERSION_NAME = "0.1-dev-snapshot";
 
     /**
      * Application version code.
