@@ -155,7 +155,13 @@ public class DashboardFrame extends JFrame {
         JButton usbReaderButton = new JButton("Source: USB Display");
 
         // Link the commands to the buttons
-        onButton.addActionListener(e -> runCommand("powerSetOn"));
+        onButton.addActionListener(e -> {
+            // Run the command
+            runCommand("powerSetOn");
+
+            // Show a notification
+            JOptionPane.showMessageDialog(this, "The beamer is now turning on. This might take a while.", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+        });
         offButton.addActionListener(e -> runCommand("powerSetOff"));
         hdmiButton.addActionListener(e -> runCommand("sourceSetHdmi"));
         hdmi2Button.addActionListener(e -> runCommand("sourceSetHdmi2"));
