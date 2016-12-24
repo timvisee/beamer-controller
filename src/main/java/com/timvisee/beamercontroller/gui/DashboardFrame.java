@@ -39,7 +39,12 @@ public class DashboardFrame extends JFrame {
     /**
      * Window title.
      */
-    private static final String WINDOW_TITLE = "Dashboard";
+    private static final String WINDOW_TITLE = "Dashboard"
+
+    /**
+     * Maximum window width.
+     */
+    private static final int WINDOW_SIZE_WIDTH_MAX = 900;
 
     /**
      * Serial port instance.
@@ -87,7 +92,7 @@ public class DashboardFrame extends JFrame {
         // Get the current dialog size
         final Dimension size = getSize();
         setMinimumSize(size);
-        setMaximumSize(new Dimension(Math.max(size.width, 900), size.height));
+        setMaximumSize(new Dimension(Math.max(size.width, WINDOW_SIZE_WIDTH_MAX), size.height));
         setPreferredSize(new Dimension(size.width + 80, size.height));
         setSize(new Dimension(size.width + 80, size.height));
 
