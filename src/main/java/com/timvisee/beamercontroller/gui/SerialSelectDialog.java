@@ -41,6 +41,11 @@ public class SerialSelectDialog extends JDialog {
     private static final int WINDOW_SIZE_WIDTH_MAX = 500;
 
     /**
+     * Serial port selection field.
+     */
+    private JComboBox<String> selectField;
+
+    /**
      * Constructor.
      */
     public SerialSelectDialog() {
@@ -70,6 +75,7 @@ public class SerialSelectDialog extends JDialog {
         setSize(new Dimension(size.width + 80, size.height));
 
         // TODO: Set whether the dialog is modal or not!
+        setModal(true);
 
         // Center the dialog to it's parent
         setLocationRelativeTo(owner);
@@ -78,8 +84,8 @@ public class SerialSelectDialog extends JDialog {
     /**
      * Show the dialog.
      */
-    public static void showDialog() {
-        showDialog(null);
+    public static String showDialog() {
+        return showDialog(null);
     }
 
     /**
@@ -87,12 +93,15 @@ public class SerialSelectDialog extends JDialog {
      *
      * @param owner Owning window, or null.
      */
-    public static void showDialog(Window owner) {
+    public static String showDialog(Window owner) {
         // Create a new instance
         final SerialSelectDialog dialog = new SerialSelectDialog(owner);
 
         // Show the dialog
         dialog.setVisible(true);
+
+        // Return the selected serial port
+        return String.valueOf(dialog.selectField.getSelectedItem());
     }
 
     /**
@@ -114,7 +123,7 @@ public class SerialSelectDialog extends JDialog {
         GridBagConstraints c = new GridBagConstraints();
 
         // Add a selection box
-        JComboBox<String> selectField = new JComboBox<>(getPorts());
+        selectField = new JComboBox<>(getPorts());
 
         // Create a button panel
         JPanel buttonPanel = new JPanel();
@@ -124,6 +133,12 @@ public class SerialSelectDialog extends JDialog {
         // Create an OK and cancel button
         JButton okButton = new JButton("Connect");
         JButton quitButton = new JButton("Quit");
+
+        // Connect to the selected serial port when the OK button is pressed
+        okButton.addActionListener(e -> {
+            // Dispose the dialog
+            dispose();
+        });
 
         // Quit the application when the quit button is pressed
         quitButton.addActionListener(e -> {
