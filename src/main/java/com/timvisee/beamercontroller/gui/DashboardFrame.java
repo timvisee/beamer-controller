@@ -84,8 +84,12 @@ public class DashboardFrame extends JFrame {
         // Pack the frame
         pack();
 
-        // Make the frame non-resizable
-        setResizable(false);
+        // Get the current dialog size
+        final Dimension size = getSize();
+        setMinimumSize(size);
+        setMaximumSize(new Dimension(Math.max(size.width, 900), size.height));
+        setPreferredSize(new Dimension(size.width + 80, size.height));
+        setSize(new Dimension(size.width + 80, size.height));
 
         // Center the dialog to it's parent
         setLocationRelativeTo(owner);
@@ -125,7 +129,7 @@ public class DashboardFrame extends JFrame {
 
         // Create the main panel
         JPanel mainPanel = new JPanel();
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 8));
         mainPanel.setLayout(new GridBagLayout());
 
         // Add the main panel to the dialog
@@ -141,6 +145,7 @@ public class DashboardFrame extends JFrame {
         // Add group labels
         c.gridx = 0;
         c.gridy = 0;
+        c.weightx = 1;
         buttonPanel.add(new JLabel("Power:"), c);
         c.gridx = 1;
         buttonPanel.add(new JLabel("Source:"), c);
