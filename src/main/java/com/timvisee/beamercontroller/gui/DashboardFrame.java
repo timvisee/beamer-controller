@@ -208,7 +208,7 @@ public class DashboardFrame extends JFrame {
         JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
         JMenuItem aboutItem = new JMenuItem("About");
-        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(this, "Developed by:\nTim Visee, timvisee.com\n\nVersion: " + BeamerController.APP_VERSION_NAME + " (" + BeamerController.APP_VERSION_CODE + ")", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE));
+        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(this, BeamerController.APP_NAME + " v" + BeamerController.APP_VERSION_NAME + " (" + BeamerController.APP_VERSION_CODE + ")\n\nDeveloped by:\nTim Visee, timvisee.com\n\nSource:\nhttps://github.com/timvisee/beamer-controller", "About" + BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE));
         helpMenu.add(aboutItem);
         add(menuBar, BorderLayout.PAGE_START);
     }
