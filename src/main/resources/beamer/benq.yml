@@ -56,7 +56,7 @@ commands:
     name: 'Source: DVI-D'
     type: write
     command: 'sour=dvid'
-  sourceSetComponent:
+  sourceSetComposite:
     name: 'Source: Composite'
     type: write
     command: 'sour=vid'
