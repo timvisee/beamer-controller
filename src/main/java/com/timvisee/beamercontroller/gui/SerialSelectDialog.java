@@ -66,6 +66,8 @@ public class SerialSelectDialog extends JDialog {
         final Dimension size = getSize();
         setMinimumSize(size);
         setMaximumSize(new Dimension(Math.max(size.width, WINDOW_SIZE_WIDTH_MAX), size.height));
+        setPreferredSize(new Dimension(size.width + 80, size.height));
+        setSize(new Dimension(size.width + 80, size.height));
 
         // TODO: Set whether the dialog is modal or not!
 
@@ -120,12 +122,21 @@ public class SerialSelectDialog extends JDialog {
         buttonPanel.setLayout(new GridLayout(1, 2, 8, 8));
 
         // Create an OK and cancel button
-        JButton okButton = new JButton("OK");
-        JButton cancelButton = new JButton("Cancel");
+        JButton okButton = new JButton("Connect");
+        JButton quitButton = new JButton("Quit");
+
+        // Quit the application when the quit button is pressed
+        quitButton.addActionListener(e -> {
+            // Show a status message
+            System.out.println("Application will now quit.");
+
+            // Quit
+            System.exit(0);
+        });
 
         // Add the buttons to the button panel
         buttonPanel.add(okButton);
-        buttonPanel.add(cancelButton);
+        buttonPanel.add(quitButton);
 
         // Add the combo box
         c.gridx = 0;
