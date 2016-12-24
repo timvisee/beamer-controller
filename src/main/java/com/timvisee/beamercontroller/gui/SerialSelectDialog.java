@@ -74,7 +74,7 @@ public class SerialSelectDialog extends JDialog {
         setPreferredSize(new Dimension(size.width + 80, size.height));
         setSize(new Dimension(size.width + 80, size.height));
 
-        // TODO: Set whether the dialog is modal or not!
+        // Set the dialog's modality
         setModal(true);
 
         // Center the dialog to it's parent
