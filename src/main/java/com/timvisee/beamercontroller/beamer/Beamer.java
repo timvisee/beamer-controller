@@ -87,6 +87,15 @@ public class Beamer {
     }
 
     /**
+     * Get the command manager.
+     *
+     * @return Command manager.
+     */
+    public CommandManager getCommandManager() {
+        return this.commandManager;
+    }
+
+    /**
      * Load the beamer from the given configuration section.
      *
      * @param beamerSection Configuration section to load the beamer from.

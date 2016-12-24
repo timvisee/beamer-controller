@@ -22,8 +22,11 @@
 
 package com.timvisee.beamercontroller.beamer.iface;
 
+import com.timvisee.beamercontroller.beamer.command.Command;
 import com.timvisee.beamercontroller.serial.SerialConfig;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+import jssc.SerialPort;
+import jssc.SerialPortException;
 
 public class SerialBeamerInterface extends BeamerInterface {
 
@@ -84,6 +87,25 @@ public class SerialBeamerInterface extends BeamerInterface {
      */
     public SerialConfig getSerialConfig() {
         return this.serialConfig;
+    }
+
+    /**
+     * Execute the given beamer command.
+     *
+     * @param command Beamer command to execute.
+     * @param port Serial port to execute the command on.
+     *
+     * @throws SerialPortException Throws if an error occurred.
+     */
+    public void executeCommand(Command command, SerialPort port) throws SerialPortException {
+        // Write the prefix
+        port.writeString(this.commandPrefix);
+
+        // Write the command itself
+        port.writeString(command.getCommand());
+
+        // Write the suffix
+        port.writeString(this.commandSuffix);
     }
 
     /**
