@@ -35,6 +35,11 @@ public class SerialSelectDialog extends JDialog {
     private static final String WINDOW_TITLE = "Serial port";
 
     /**
+     * Maximum window width.
+     */
+    private static final int WINDOW_SIZE_WIDTH_MAX = 500;
+
+    /**
      * Constructor.
      */
     public SerialSelectDialog() {
@@ -55,6 +60,11 @@ public class SerialSelectDialog extends JDialog {
 
         // Pack the frame
         pack();
+
+        // Get the current dialog size
+        final Dimension size = getSize();
+        setMinimumSize(size);
+        setMaximumSize(new Dimension(Math.max(size.width, WINDOW_SIZE_WIDTH_MAX), size.height));
 
         // TODO: Set whether the dialog is modal or not!
 
