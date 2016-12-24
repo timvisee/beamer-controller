@@ -136,63 +136,39 @@ public class DashboardFrame extends JFrame {
 
         // Create a button panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(14, 1, 8, 8));
-
-        // Set up buttons
-        JButton onButton = new JButton("Power: On");
-        JButton offButton = new JButton("Power: Off");
-        JButton hdmiButton = new JButton("Source: HDMI");
-        JButton hdmi2Button = new JButton("Source: HDMI 2");
-        JButton computerButton = new JButton("Source: Computer");
-        JButton computer2Button = new JButton("Source: Computer 2");
-        JButton componentButton = new JButton("Source: Component");
-        JButton dviAButton = new JButton("Source: DVI-A");
-        JButton dviDButton = new JButton("Source: DVI-D");
-        JButton compositeButton = new JButton("Source: Composite");
-        JButton sVideoButton = new JButton("Source: S-Video");
-        JButton networkButton = new JButton("Source: Network");
-        JButton usbDisplayButton = new JButton("Source: USB Reader");
-        JButton usbReaderButton = new JButton("Source: USB Display");
+        buttonPanel.setLayout(new GridBagLayout());
 
         // Link the commands to the buttons
-        onButton.addActionListener(e -> {
-            // Run the command
-            runCommand("powerSetOn");
+        createButton("Power: On", "powerSetOn", buttonPanel, 0, 0);
+        createButton("Power: Off", "powerSetOff", buttonPanel, 0, 1);
+        createButton("Source: HDMI", "sourceSetHdmi", buttonPanel, 1, 0);
+        createButton("Source: HDMI 2", "sourceSetHdmi2", buttonPanel, 1, 1);
+        createButton("Source: Computer", "sourceSetComputer", buttonPanel, 1, 2);
+        createButton("Source: Computer 2", "sourceSetComputer2", buttonPanel, 1, 3);
+        createButton("Source: Component", "sourceSetComponent", buttonPanel, 1, 4);
+        createButton("Source: DVI-A", "sourceSetDviA", buttonPanel, 1,5);
+        createButton("Source: DVI-D", "sourceSetDviD", buttonPanel, 1, 6);
+        createButton("Source: Composite", "sourceSetComposite", buttonPanel, 1, 7);
+        createButton("Source: S-Video", "sourceSetSvideo", buttonPanel, 1,8);
+        createButton("Source: Network", "sourceSetNetwork", buttonPanel, 1, 9);
+        createButton("Source: USB Display", "sourceSetUsbDisplay", buttonPanel, 1, 10);
+        createButton("Source: USB Reader", "sourceSetUsbReader", buttonPanel, 1, 11);
+        createButton("Mode: Dynamic", "pictureModeSetDynamic", buttonPanel, 2, 0);
+        createButton("Mode: Presentation", "pictureModeSetPresentation", buttonPanel, 2, 1);
+        createButton("Mode: sRGB", "pictureModeSetSrgb", buttonPanel, 2, 2);
+        createButton("Mode: Bright", "pictureModeSetBright", buttonPanel, 2, 3);
+        createButton("Mode: Living Room", "pictureModeSetLivingRoom", buttonPanel, 2, 4);
+        createButton("Mode: Game", "pictureModeSetGame", buttonPanel, 2, 5);
+        createButton("Mode: Cinema", "pictureModeSetCinema", buttonPanel, 2, 6);
+        createButton("Mode: Standard", "pictureModeSetStandard", buttonPanel, 2, 7);
+        createButton("Mode: User 1", "pictureModeSetUser1", buttonPanel, 2, 8);
+        createButton("Mode: User 2", "pictureModeSetUser2", buttonPanel, 2, 9);
+        createButton("Mode: User 3", "pictureModeSetUser3", buttonPanel, 2, 10);
 
-            // Show a notification
-            JOptionPane.showMessageDialog(this, "The beamer is now turning on. This might take a while.", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-        });
-        offButton.addActionListener(e -> runCommand("powerSetOff"));
-        hdmiButton.addActionListener(e -> runCommand("sourceSetHdmi"));
-        hdmi2Button.addActionListener(e -> runCommand("sourceSetHdmi2"));
-        computerButton.addActionListener(e -> runCommand("sourceSetComputer"));
-        computer2Button.addActionListener(e -> runCommand("sourceSetComputer2"));
-        componentButton.addActionListener(e -> runCommand("sourceSetComponent"));
-        dviAButton.addActionListener(e -> runCommand("sourceSetDviA"));
-        dviDButton.addActionListener(e -> runCommand("sourceSetDviD"));
-        compositeButton.addActionListener(e -> runCommand("sourceSetComposite"));
-        sVideoButton.addActionListener(e -> runCommand("sourceSetSvideo"));
-        networkButton.addActionListener(e -> runCommand("sourceSetNetwork"));
-        usbDisplayButton.addActionListener(e -> runCommand("sourceSetUsbDisplay"));
-        usbReaderButton.addActionListener(e -> runCommand("sourceSetUsbReader"));
+        // Show a notification
+//            JOptionPane.showMessageDialog(this, "The beamer is now turning on. This might take a while.", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
 
-        // Add the buttons
-        buttonPanel.add(onButton);
-        buttonPanel.add(offButton);
-        buttonPanel.add(hdmiButton);
-        buttonPanel.add(hdmi2Button);
-        buttonPanel.add(computerButton);
-        buttonPanel.add(computer2Button);
-        buttonPanel.add(componentButton);
-        buttonPanel.add(dviAButton);
-        buttonPanel.add(dviDButton);
-        buttonPanel.add(compositeButton);
-        buttonPanel.add(sVideoButton);
-        buttonPanel.add(networkButton);
-        buttonPanel.add(usbDisplayButton);
-        buttonPanel.add(usbReaderButton);
-
-        // Add the combo box
+        // Add the button panel to the main panel
         c.gridx = 0;
         c.gridy = 0;
         c.fill = GridBagConstraints.BOTH;
@@ -211,6 +187,33 @@ public class DashboardFrame extends JFrame {
         aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(this, BeamerController.APP_NAME + " v" + BeamerController.APP_VERSION_NAME + " (" + BeamerController.APP_VERSION_CODE + ")\n\nDeveloped by:\nTim Visee, timvisee.com\n\nSource:\nhttps://github.com/timvisee/beamer-controller", "About" + BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE));
         helpMenu.add(aboutItem);
         add(menuBar, BorderLayout.PAGE_START);
+    }
+
+    /**
+     * Create a button for the given command.
+     *
+     * @param name Name of the button.
+     * @param commandId Command ID.
+     * @param buttonPanel Button panel to add the button to.
+     * @param x X coordinate of the button to add.
+     * @param y Y coordinate of the button to add.
+     */
+    public void createButton(String name, String commandId, JPanel buttonPanel, int x, int y) {
+        // Create the button
+        final JButton button = new JButton(name);
+
+        // Link the button action
+        button.addActionListener(e -> runCommand(commandId));
+
+        // Create the grid bag constraints configuration
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = x;
+        c.gridy = y;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+
+        // Add the button to the panel
+        buttonPanel.add(button, c);
     }
 
     /**
