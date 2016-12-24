@@ -39,7 +39,7 @@ public class DashboardFrame extends JFrame {
     /**
      * Window title.
      */
-    private static final String WINDOW_TITLE = "Dashboard"
+    private static final String WINDOW_TITLE = "Dashboard";
 
     /**
      * Maximum window width.
