@@ -22,10 +22,15 @@
 
 package com.timvisee.beamercontroller;
 
+import com.timvisee.beamercontroller.beamer.Beamer;
 import com.timvisee.beamercontroller.beamer.BeamerManager;
+import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
+import com.timvisee.beamercontroller.gui.DashboardFrame;
 import com.timvisee.beamercontroller.gui.SerialSelectDialog;
 import com.timvisee.beamercontroller.util.ProgressDialog;
 import com.timvisee.beamercontroller.util.SwingUtils;
+import jssc.SerialPort;
+import jssc.SerialPortException;
 import jssc.SerialPortList;
 
 import javax.swing.*;
@@ -87,9 +92,63 @@ public class App {
         String serialPortName = SerialSelectDialog.showDialog();
 
         // Show a progress dialog for the connection progress
-        ProgressDialog dialog = new ProgressDialog(null, BeamerController.APP_NAME, false);
+        ProgressDialog dialog = new ProgressDialog(null, "Connecting to beamer...", false);
         dialog.setStatus("Connecting to beamer...");
         dialog.setShowProgress(false);
         dialog.setVisible(true);
+
+        // Set up the serial port
+        final SerialPort port = new SerialPort(serialPortName);
+
+        try {
+            // Open the serial port
+            dialog.setStatus("Opening port...");
+            port.openPort();
+
+            // Configure the port
+            dialog.setStatus("Configuring port...");
+
+            // Find the beamer to use
+            final Beamer beamer = beamerManager.getBeamers().get(0);
+
+            // Find the serial interface configuration for the beamer
+            SerialBeamerInterface serialBeamerInterface = (SerialBeamerInterface) beamer.getBeamerInterfaceManager().getInterfaces().get(0);
+
+            // Apply the serial beamer configuration to the selected port
+            serialBeamerInterface.getSerialConfig().applyToPort(port);
+
+            // Read data from the beamer and print it to the console
+            port.addEventListener(event -> {
+                if(event.isRXCHAR() && event.getEventValue() > 0) {
+                    try {
+                        String receivedData = port.readString(event.getEventValue());
+                        System.out.println("Received response: " + receivedData);
+                    }
+                    catch (SerialPortException ex) {
+                        System.out.println("Error in receiving string from COM-port: " + ex);
+                    }
+                }
+            });
+
+            // Hide the progress dialog
+            dialog.setStatus("Loading dashboard...");
+            dialog.setVisible(false);
+
+            // Show the dashboard
+            DashboardFrame.showFrame(port);
+
+        } catch(SerialPortException e) {
+            // Hide the progress dialog
+            dialog.setVisible(false);
+
+            // Print the stack trace
+            e.printStackTrace();
+
+            // Show an error notification
+            JOptionPane.showMessageDialog(null, "Failed to connect through the selected serial port. The application will now quit.", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
+
+            // Exit the application
+            System.exit(0);
+        }
     }
 }
