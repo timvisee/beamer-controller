@@ -28,23 +28,23 @@ commands:
     name: 'Power: Get status'
     type: read
     command: 'pow=?'
-  powerSetComputer:
+  sourceSetComputer:
     name: 'Source: Computer'
     type: write
     command: 'sour=RGB'
-  powerSetComputer2:
+  sourceSetComputer2:
     name: 'Source: Computer 2'
     type: write
     command: 'sour=RGB2'
-  powerSetHdmi:
+  sourceSetHdmi:
     name: 'Source: HDMI'
     type: write
     command: 'sour=hdmi'
-  powerSetHdmi2:
+  sourceSetHdmi2:
     name: 'Source: HDMI2'
     type: write
     command: 'sour=hdmi2'
-  powerGetSource:
+  sourceGetSource:
     name: 'Source: Get source'
     type: read
     command: 'sour=?'
