@@ -44,6 +44,38 @@ commands:
     name: 'Source: HDMI2'
     type: write
     command: 'sour=hdmi2'
+  sourceSetComponent:
+    name: 'Source: Component'
+    type: write
+    command: 'sour=ypbr'
+  sourceSetDviA:
+    name: 'Source: DVI-A'
+    type: write
+    command: 'sour=dviA'
+  sourceSetDviD:
+    name: 'Source: DVI-D'
+    type: write
+    command: 'sour=dvid'
+  sourceSetComponent:
+    name: 'Source: Composite'
+    type: write
+    command: 'sour=vid'
+  sourceSetSvideo:
+    name: 'Source: S-Video'
+    type: write
+    command: 'sour=svid'
+  sourceSetNetwork:
+    name: 'Source: Network'
+    type: write
+    command: 'sour=network'
+  sourceSetUsbDisplay:
+    name: 'Source: USB Display'
+    type: write
+    command: 'sour=usbdisplay'
+  sourceSetUsbReader:
+    name: 'Source: USB Reader'
+    type: write
+    command: 'sour=usbreader'
   sourceGetSource:
     name: 'Source: Get source'
     type: read
