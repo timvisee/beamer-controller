@@ -136,7 +136,7 @@ public class DashboardFrame extends JFrame {
 
         // Create a button panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(6, 1, 8, 8));
+        buttonPanel.setLayout(new GridLayout(14, 1, 8, 8));
 
         // Set up buttons
         JButton onButton = new JButton("Power: On");
@@ -145,6 +145,14 @@ public class DashboardFrame extends JFrame {
         JButton hdmi2Button = new JButton("Source: HDMI 2");
         JButton computerButton = new JButton("Source: Computer");
         JButton computer2Button = new JButton("Source: Computer 2");
+        JButton componentButton = new JButton("Source: Component");
+        JButton dviAButton = new JButton("Source: DVI-A");
+        JButton dviDButton = new JButton("Source: DVI-D");
+        JButton compositeButton = new JButton("Source: Composite");
+        JButton sVideoButton = new JButton("Source: S-Video");
+        JButton networkButton = new JButton("Source: Network");
+        JButton usbDisplayButton = new JButton("Source: USB Reader");
+        JButton usbReaderButton = new JButton("Source: USB Display");
 
         // Link the commands to the buttons
         onButton.addActionListener(e -> runCommand("powerSetOn"));
@@ -153,6 +161,14 @@ public class DashboardFrame extends JFrame {
         hdmi2Button.addActionListener(e -> runCommand("sourceSetHdmi2"));
         computerButton.addActionListener(e -> runCommand("sourceSetComputer"));
         computer2Button.addActionListener(e -> runCommand("sourceSetComputer2"));
+        componentButton.addActionListener(e -> runCommand("sourceSetComponent"));
+        dviAButton.addActionListener(e -> runCommand("sourceSetDviA"));
+        dviDButton.addActionListener(e -> runCommand("sourceSetDviD"));
+        compositeButton.addActionListener(e -> runCommand("sourceSetComposite"));
+        sVideoButton.addActionListener(e -> runCommand("sourceSetSvideo"));
+        networkButton.addActionListener(e -> runCommand("sourceSetNetwork"));
+        usbDisplayButton.addActionListener(e -> runCommand("sourceSetUsbDisplay"));
+        usbReaderButton.addActionListener(e -> runCommand("sourceSetUsbReader"));
 
         // Add the buttons
         buttonPanel.add(onButton);
@@ -161,6 +177,14 @@ public class DashboardFrame extends JFrame {
         buttonPanel.add(hdmi2Button);
         buttonPanel.add(computerButton);
         buttonPanel.add(computer2Button);
+        buttonPanel.add(componentButton);
+        buttonPanel.add(dviAButton);
+        buttonPanel.add(dviDButton);
+        buttonPanel.add(compositeButton);
+        buttonPanel.add(sVideoButton);
+        buttonPanel.add(networkButton);
+        buttonPanel.add(usbDisplayButton);
+        buttonPanel.add(usbReaderButton);
 
         // Add the combo box
         c.gridx = 0;
