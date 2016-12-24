@@ -197,6 +197,20 @@ public class DashboardFrame extends JFrame {
         c.gridy = 0;
         c.fill = GridBagConstraints.BOTH;
         mainPanel.add(buttonPanel, c);
+
+        // Create a simple menu bar
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem exitItem = new JMenuItem("Exit");
+        exitItem.addActionListener(e -> System.exit(0));
+        fileMenu.add(exitItem);
+        menuBar.add(fileMenu);
+        JMenu helpMenu = new JMenu("Help");
+        menuBar.add(helpMenu);
+        JMenuItem aboutItem = new JMenuItem("About");
+        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(this, "Developed by:\nTim Visee, timvisee.com", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE));
+        helpMenu.add(aboutItem);
+        add(menuBar, BorderLayout.PAGE_START);
     }
 
     /**
