@@ -27,6 +27,7 @@ import com.timvisee.beamercontroller.beamer.BeamerManager;
 import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
 import com.timvisee.beamercontroller.gui.DashboardFrame;
 import com.timvisee.beamercontroller.gui.SerialSelectDialog;
+import com.timvisee.beamercontroller.serial.BaudRateType;
 import com.timvisee.beamercontroller.util.ProgressDialog;
 import com.timvisee.beamercontroller.util.SwingUtils;
 import jssc.SerialPort;
@@ -46,6 +47,12 @@ public class App {
      * Beamer manager.
      */
     private BeamerManager beamerManager = new BeamerManager();
+
+    /**
+     * Baud rate to use.
+     */
+    // TODO: This should be removed. This is used for a rapid release snapshot.
+    public int baud = 115200;
 
     /**
      * Constructor.
@@ -113,6 +120,9 @@ public class App {
 
             // Find the serial interface configuration for the beamer
             SerialBeamerInterface serialBeamerInterface = (SerialBeamerInterface) beamer.getBeamerInterfaceManager().getInterfaces().get(0);
+
+            // Set the custom baud rate
+            serialBeamerInterface.getSerialConfig().setBaudRateType(BaudRateType.getByRate(this.baud));
 
             // Apply the serial beamer configuration to the selected port
             serialBeamerInterface.getSerialConfig().applyToPort(port);

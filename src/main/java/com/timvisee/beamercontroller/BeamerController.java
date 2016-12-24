@@ -47,8 +47,19 @@ public class BeamerController {
         // The application has started, show a status message
         System.out.println("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
 
-        // Get the application instance, and initialize
+        // Get the application instance
         App app = App.getInstance();
+
+        // Check whether a custom baud rate is given
+        if(args.length > 0) {
+            // Set the rate
+            app.baud = Integer.valueOf(args[0]);
+
+            // Show a status message
+            System.out.println("Using custom baud rate: " + app.baud);
+        }
+
+        // Initialize the app
         app.init();
     }
 }
