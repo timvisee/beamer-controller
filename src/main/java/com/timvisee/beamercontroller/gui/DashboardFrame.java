@@ -23,7 +23,13 @@
 package com.timvisee.beamercontroller.gui;
 
 import com.timvisee.beamercontroller.BeamerController;
+import com.timvisee.beamercontroller.beamer.Beamer;
+import com.timvisee.beamercontroller.beamer.command.Command;
+import com.timvisee.beamercontroller.beamer.command.CommandManager;
+import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
+import com.timvisee.beamercontroller.util.ProgressDialog;
 import jssc.SerialPort;
+import jssc.SerialPortException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,12 +48,19 @@ public class DashboardFrame extends JFrame {
     private SerialPort port;
 
     /**
+     * Beamer instance.
+     */
+    // TODO: This should be removed, this is only used for rapid snapshot release.
+    private Beamer beamer;
+
+    /**
      * Constructor.
      *
      * @param port Serial port.
+     * @param beamer Beamer instance.
      */
-    public DashboardFrame(SerialPort port) {
-        this(null, port);
+    public DashboardFrame(SerialPort port, Beamer beamer) {
+        this(null, port, beamer);
     }
 
     /**
@@ -55,13 +68,15 @@ public class DashboardFrame extends JFrame {
      *
      * @param owner Owning window, or null.
      * @param port Serial port.
+     * @param beamer Beamer instance.
      */
-    public DashboardFrame(Window owner, SerialPort port) {
+    public DashboardFrame(Window owner, SerialPort port, Beamer beamer) {
         // Construct the super, with the window title
         super(WINDOW_TITLE + " - " + BeamerController.APP_NAME);
 
-        // Set the serial port
+        // Set the serial port and beamer
         this.port = port;
+        this.beamer = beamer;
 
         // Build the UI
         buildUi();
@@ -80,9 +95,10 @@ public class DashboardFrame extends JFrame {
      * Show the dialog.
      *
      * @param port Serial port.
+     * @param beamer Beamer instance.
      */
-    public static void showFrame(SerialPort port) {
-        showFrame(null, port);
+    public static void showFrame(SerialPort port, Beamer beamer) {
+        showFrame(null, port, beamer);
     }
 
     /**
@@ -90,10 +106,11 @@ public class DashboardFrame extends JFrame {
      *
      * @param owner Owning window, or null.
      * @param port Serial port.
+     * @param beamer Beamer instance.
      */
-    public static void showFrame(Window owner, SerialPort port) {
+    public static void showFrame(Window owner, SerialPort port, Beamer beamer) {
         // Create a new instance
-        final DashboardFrame frame = new DashboardFrame(owner, port);
+        final DashboardFrame frame = new DashboardFrame(owner, port, beamer);
 
         // Show the dialog
         frame.setVisible(true);
@@ -119,26 +136,87 @@ public class DashboardFrame extends JFrame {
 
         // Create a button panel
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5, 1, 8, 8));
+        buttonPanel.setLayout(new GridLayout(6, 1, 8, 8));
 
         // Set up buttons
         JButton onButton = new JButton("Power: On");
         JButton offButton = new JButton("Power: Off");
         JButton hdmiButton = new JButton("Source: HDMI");
         JButton hdmi2Button = new JButton("Source: HDMI 2");
-        JButton rgbButton = new JButton("Source: RGB");
+        JButton computerButton = new JButton("Source: Computer");
+        JButton computer2Button = new JButton("Source: Computer 2");
+
+        // Link the commands to the buttons
+        onButton.addActionListener(e -> runCommand("powerSetOn"));
+        offButton.addActionListener(e -> runCommand("powerSetOff"));
+        hdmiButton.addActionListener(e -> runCommand("sourceSetHdmi"));
+        hdmi2Button.addActionListener(e -> runCommand("sourceSetHdmi2"));
+        computerButton.addActionListener(e -> runCommand("sourceSetComputer"));
+        computer2Button.addActionListener(e -> runCommand("sourceSetComputer2"));
 
         // Add the buttons
         buttonPanel.add(onButton);
         buttonPanel.add(offButton);
         buttonPanel.add(hdmiButton);
         buttonPanel.add(hdmi2Button);
-        buttonPanel.add(rgbButton);
+        buttonPanel.add(computerButton);
+        buttonPanel.add(computer2Button);
 
         // Add the combo box
         c.gridx = 0;
         c.gridy = 0;
         c.fill = GridBagConstraints.BOTH;
         mainPanel.add(buttonPanel, c);
+    }
+
+    /**
+     * Run the command with the given name.
+     *
+     * @param id Command ID.
+     */
+    public void runCommand(String id) {
+        // Get the beamer's command manager and serial interface
+        CommandManager commandManager = this.beamer.getCommandManager();
+        SerialBeamerInterface serialBeamerInterface = (SerialBeamerInterface) this.beamer.getBeamerInterfaceManager().getInterfaces().get(0);
+
+        // Loop through the commands, and find the correct one
+        for(Command command : commandManager.getCommands()) {
+            // Continue if this command isn't correct
+            if(!command.getId().equalsIgnoreCase(id))
+                continue;
+
+            // Create a progress dialog
+            ProgressDialog progressDialog = new ProgressDialog(this, BeamerController.APP_NAME, false);
+            progressDialog.setStatus("Executing command...");
+            progressDialog.setShowProgress(false);
+            progressDialog.setVisible(true);
+
+            try {
+                // Execute the command
+                serialBeamerInterface.executeCommand(command, this.port);
+
+                // Dispose the progress dialog
+                progressDialog.dispose();
+
+                // Show a status message in the console
+                System.out.println("Executed beamer command: " + command.getName());
+
+            } catch(SerialPortException e) {
+                // Dispose the progress dialog
+                progressDialog.dispose();
+
+                // Show an error dialog
+                JOptionPane.showMessageDialog(this, "Failed to execute command!", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
+
+                // Print an error to the console
+                e.printStackTrace();
+            }
+
+            // Return when done
+            return;
+        }
+
+        // Show an error dialog
+        JOptionPane.showMessageDialog(this, "Unknown command.", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
     }
 }

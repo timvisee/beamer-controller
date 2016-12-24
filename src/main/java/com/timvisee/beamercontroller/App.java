@@ -135,7 +135,7 @@ public class App {
             dialog.setVisible(false);
 
             // Show the dashboard
-            DashboardFrame.showFrame(port);
+            DashboardFrame.showFrame(port, beamer);
 
         } catch(SerialPortException e) {
             // Hide the progress dialog
