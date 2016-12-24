@@ -56,7 +56,9 @@ public class ResourceManager {
      * @throws URISyntaxException Throws if the path is invalid.
      */
     public static File getFile(String path) throws URISyntaxException {
-        return new File(getFileUri(path));
+//        return new File(getFileUri(path));
+        // TODO: Temp fix!
+        return new File("." + RESOURCE_ROOT + path);
     }
 
     /**
