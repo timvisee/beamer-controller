@@ -24,7 +24,9 @@ package com.timvisee.beamercontroller;
 
 import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
 
+import javax.print.DocFlavor;
 import java.io.File;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -36,42 +38,24 @@ public class ResourceManager {
     public static final String RESOURCE_ROOT = "/res/";
 
     /**
-     * Get the URL for a resource.
+     * Get the input stream for the given resource.
      *
-     * @return File URI.
-     *
-     * @throws URISyntaxException Throws if the path is invalid.
+     * @return Input stream.
      */
-    public static URI getFileUri(String path) throws URISyntaxException {
-        return ResourceManager.class.getResource(RESOURCE_ROOT + path).toURI();
-    }
-
-    /**
-     * Get a resource file by it's path.
-     *
-     * @param path Path of the file.
-     *
-     * @return Resource file.
-     *
-     * @throws URISyntaxException Throws if the path is invalid.
-     */
-    public static File getFile(String path) throws URISyntaxException {
-//        return new File(getFileUri(path));
-        // TODO: Temp fix!
-        return new File("." + RESOURCE_ROOT + path);
+    public static InputStream getResourceStream(String path) throws URISyntaxException {
+        return ResourceManager.class.getResourceAsStream(RESOURCE_ROOT + path);
     }
 
     /**
      * Load a configuration file from the bundled resources.
      *
-     * @param path File path.
+     * @param path Resource path.
      *
      * @return Loaded configuration file, or null if loading failed.
      *
      * @throws URISyntaxException Throws if the path is invalid.
      */
     public static YamlConfiguration loadConfig(String path) throws URISyntaxException {
-        // Try to load the configuration and return it
-        return YamlConfiguration.loadConfiguration(getFile(path));
+        return YamlConfiguration.loadConfiguration(getResourceStream(path));
     }
 }
