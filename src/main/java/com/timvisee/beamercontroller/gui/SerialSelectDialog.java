@@ -28,6 +28,8 @@ import jssc.SerialPortList;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class SerialSelectDialog extends JDialog {
 
@@ -67,6 +69,39 @@ public class SerialSelectDialog extends JDialog {
 
         // Pack the frame
         pack();
+
+        // Set the close method
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        // Listen for close
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Dispose the frame
+                dispose();
+
+                // Properly exit the application
+                App.getInstance().exit();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+
+            @Override
+            public void windowActivated(WindowEvent e) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
         // Get the current dialog size
         final Dimension size = getSize();
