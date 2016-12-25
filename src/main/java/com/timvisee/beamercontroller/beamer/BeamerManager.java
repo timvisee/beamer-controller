@@ -22,7 +22,7 @@
 
 package com.timvisee.beamercontroller.beamer;
 
-import com.timvisee.beamercontroller.ResourceManager;
+import com.timvisee.beamercontroller.resource.ResourceManager;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;

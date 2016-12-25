@@ -20,7 +20,7 @@
  *
  */
 
-package com.timvisee.beamercontroller.util;
+package com.timvisee.beamercontroller.util.swing;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

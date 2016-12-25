@@ -20,14 +20,11 @@
  *
  */
 
-package com.timvisee.beamercontroller;
+package com.timvisee.beamercontroller.resource;
 
 import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
 
-import javax.print.DocFlavor;
-import java.io.File;
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URISyntaxException;
 
 public class ResourceManager {

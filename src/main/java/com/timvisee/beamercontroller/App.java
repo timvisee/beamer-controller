@@ -30,7 +30,7 @@ import com.timvisee.beamercontroller.gui.SerialSelectDialog;
 import com.timvisee.beamercontroller.serial.BaudRateType;
 import com.timvisee.beamercontroller.util.CommandUtils;
 import com.timvisee.beamercontroller.util.ProgressDialog;
-import com.timvisee.beamercontroller.util.SwingUtils;
+import com.timvisee.beamercontroller.util.swing.SwingUtils;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
