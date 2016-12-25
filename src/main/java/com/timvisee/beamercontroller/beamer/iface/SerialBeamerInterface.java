@@ -24,6 +24,7 @@ package com.timvisee.beamercontroller.beamer.iface;
 
 import com.timvisee.beamercontroller.beamer.command.Command;
 import com.timvisee.beamercontroller.serial.SerialConfig;
+import com.timvisee.beamercontroller.util.CommandUtils;
 import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
 import jssc.SerialPort;
 import jssc.SerialPortException;
@@ -98,14 +99,16 @@ public class SerialBeamerInterface extends BeamerInterface {
      * @throws SerialPortException Throws if an error occurred.
      */
     public void executeCommand(Command command, SerialPort port) throws SerialPortException {
-        // Write the prefix
-        port.writeString(this.commandPrefix);
+        // Build the string to send
+        final String encapsulatedCommand = this.commandPrefix +
+                command.getCommand() +
+                this.commandSuffix;
 
-        // Write the command itself
-        port.writeString(command.getCommand());
+        // Print a status message
+        System.out.println("Sending to beamer: " + CommandUtils.formatCommand(encapsulatedCommand));
 
-        // Write the suffix
-        port.writeString(this.commandSuffix);
+        // Write the command
+        port.writeString(encapsulatedCommand);
     }
 
     /**
