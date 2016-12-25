@@ -196,15 +196,15 @@ public class DashboardFrame extends JFrame {
 
         // Create a simple menu bar
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
+        JMenu beamerMenu = new JMenu("Beamer");
         JMenuItem commandItem = new JMenuItem("Run custom command...");
         commandItem.addActionListener(e -> runCustomCommand());
-        fileMenu.add(commandItem);
-        fileMenu.addSeparator();
+        beamerMenu.add(commandItem);
+        beamerMenu.addSeparator();
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(e -> System.exit(0));
-        fileMenu.add(exitItem);
-        menuBar.add(fileMenu);
+        beamerMenu.add(exitItem);
+        menuBar.add(beamerMenu);
         JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
         JMenuItem aboutItem = new JMenuItem("About");
