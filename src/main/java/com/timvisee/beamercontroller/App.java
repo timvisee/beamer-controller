@@ -28,6 +28,7 @@ import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
 import com.timvisee.beamercontroller.gui.DashboardFrame;
 import com.timvisee.beamercontroller.gui.SerialSelectDialog;
 import com.timvisee.beamercontroller.serial.BaudRateType;
+import com.timvisee.beamercontroller.util.CommandUtils;
 import com.timvisee.beamercontroller.util.ProgressDialog;
 import com.timvisee.beamercontroller.util.SwingUtils;
 import jssc.SerialPort;
@@ -131,10 +132,10 @@ public class App {
             port.addEventListener(event -> {
                 if(event.isRXCHAR() && event.getEventValue() > 0) {
                     try {
-                        String receivedData = port.readString(event.getEventValue());
-                        System.out.println("Received response: " + receivedData);
-                    }
-                    catch (SerialPortException ex) {
+                        final String receivedData = port.readString(event.getEventValue());
+                        System.out.println("Received from beamer: " + CommandUtils.formatCommand(receivedData));
+
+                    } catch (SerialPortException ex) {
                         System.out.println("Error in receiving string from COM-port: " + ex);
                     }
                 }
