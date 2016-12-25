@@ -31,6 +31,11 @@ public class DirectoryUtils {
     public static final String APPLICATION_DIRECTORY_NAME = "beamer-controller";
 
     /**
+     * Application data directory on Mac OS X.
+     */
+    public static final String OS_MAC_APPLICATION_DATA_DIRECTORY = "Library/Application Support";
+
+    /**
      * Get the application data directory for the current system.
      *
      * @return Application data directory.
@@ -52,7 +57,7 @@ public class DirectoryUtils {
                 return new File(homeDir);
 
             case MAC_OS_X:
-                return new File(homeDir + "/Library/Application Support");
+                return new File(homeDir, OS_MAC_APPLICATION_DATA_DIRECTORY );
 
             default:
                 return new File(homeDir);
