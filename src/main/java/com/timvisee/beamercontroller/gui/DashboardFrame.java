@@ -185,9 +185,6 @@ public class DashboardFrame extends JFrame {
         createButton("User 2", "pictureModeSetUser2", buttonPanel, 2, 10);
         createButton("User 3", "pictureModeSetUser3", buttonPanel, 2, 11);
 
-        // Show a notification
-//            JOptionPane.showMessageDialog(this, "The beamer is now turning on. This might take a while.", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
-
         // Add the button panel to the main panel
         c.gridx = 0;
         c.gridy = 0;
@@ -196,11 +193,13 @@ public class DashboardFrame extends JFrame {
         c.fill = GridBagConstraints.BOTH;
         mainPanel.add(buttonPanel, c);
 
+        // Add alpha notice
         c.gridx = 0;
         c.gridy = 1;
         c.weightx = 1;
         c.weighty = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(16, 0, 0, 0);
         mainPanel.add(new JLabel("<html><font color='gray'><b>Note:</b> This is an early prototype, and still an unfinished product.<br />" +
                 "The application is currently in pre-alpha stage and is still<br />prone to bugs, glitches and other unwanted behaviour.</font></html>"), c);
