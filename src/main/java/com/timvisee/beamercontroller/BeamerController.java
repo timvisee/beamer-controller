@@ -39,13 +39,25 @@ public class BeamerController {
     public static final int APP_VERSION_CODE = 1;
 
     /**
+     * Application about.
+     */
+    public static final String APP_ABOUT = "Tim Visée, www.timvisee.com";
+
+    /**
+     * Application source URL.
+     */
+    public static final String APP_SOURCE_URL = "https://github.com/timvisee/beamer-controller";
+
+    /**
      * Main method, called on start.
      *
      * @param args Program arguments.
      */
     public static void main(String[] args) {
-        // The application has started, show a status message
-        System.out.println("Starting " + APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
+        // The application is starting, show a status message
+        System.out.println(APP_NAME + " v" + APP_VERSION_NAME + " (" + APP_VERSION_CODE + ").");
+        System.out.println("Developed by " + APP_ABOUT + "\n");
+        System.out.println("Starting " + APP_NAME + "...");
 
         // Get the application instance
         App app = App.getInstance();
