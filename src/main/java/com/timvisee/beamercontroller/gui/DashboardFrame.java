@@ -26,6 +26,7 @@ import com.timvisee.beamercontroller.BeamerController;
 import com.timvisee.beamercontroller.beamer.Beamer;
 import com.timvisee.beamercontroller.beamer.command.Command;
 import com.timvisee.beamercontroller.beamer.command.CommandManager;
+import com.timvisee.beamercontroller.beamer.command.CommandType;
 import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
 import com.timvisee.beamercontroller.util.ProgressDialog;
 import jssc.SerialPort;
@@ -196,6 +197,10 @@ public class DashboardFrame extends JFrame {
         // Create a simple menu bar
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
+        JMenuItem commandItem = new JMenuItem("Run custom command...");
+        commandItem.addActionListener(e -> runCustomCommand());
+        fileMenu.add(commandItem);
+        fileMenu.addSeparator();
         JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(e -> System.exit(0));
         fileMenu.add(exitItem);
@@ -263,9 +268,8 @@ public class DashboardFrame extends JFrame {
      * @param id Command ID.
      */
     public void runCommand(String id) {
-        // Get the beamer's command manager and serial interface
+        // Get the beamer's command manager
         CommandManager commandManager = this.beamer.getCommandManager();
-        SerialBeamerInterface serialBeamerInterface = (SerialBeamerInterface) this.beamer.getBeamerInterfaceManager().getInterfaces().get(0);
 
         // Loop through the commands, and find the correct one
         for(Command command : commandManager.getCommands()) {
@@ -273,32 +277,8 @@ public class DashboardFrame extends JFrame {
             if(!command.getId().equalsIgnoreCase(id))
                 continue;
 
-            // Create a progress dialog
-            ProgressDialog progressDialog = new ProgressDialog(this, BeamerController.APP_NAME, false);
-            progressDialog.setStatus("Executing command...");
-            progressDialog.setShowProgress(false);
-            progressDialog.setVisible(true);
-
-            try {
-                // Execute the command
-                serialBeamerInterface.executeCommand(command, this.port);
-
-                // Dispose the progress dialog
-                progressDialog.dispose();
-
-                // Show a status message in the console
-                System.out.println("Executed beamer command: " + command.getName());
-
-            } catch(SerialPortException e) {
-                // Dispose the progress dialog
-                progressDialog.dispose();
-
-                // Show an error dialog
-                JOptionPane.showMessageDialog(this, "Failed to execute command!", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
-
-                // Print an error to the console
-                e.printStackTrace();
-            }
+            // Run the command
+            runCommand(command);
 
             // Return when done
             return;
@@ -306,5 +286,60 @@ public class DashboardFrame extends JFrame {
 
         // Show an error dialog
         JOptionPane.showMessageDialog(this, "Unknown command.", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Run the given command.
+     *
+     * @param command Command to run.
+     */
+    public void runCommand(Command command) {
+        // Get the serial beamer interface
+        SerialBeamerInterface serialBeamerInterface = (SerialBeamerInterface) this.beamer.getBeamerInterfaceManager().getInterfaces().get(0);
+
+        // Create a progress dialog
+        ProgressDialog progressDialog = new ProgressDialog(this, BeamerController.APP_NAME, false);
+        progressDialog.setStatus("Executing command...");
+        progressDialog.setShowProgress(false);
+        progressDialog.setVisible(true);
+
+        try {
+            // Execute the command
+            serialBeamerInterface.executeCommand(command, this.port);
+
+            // Dispose the progress dialog
+            progressDialog.dispose();
+
+            // Show a status message in the console
+            System.out.println("Executed beamer command: " + command.getName());
+
+        } catch(SerialPortException e) {
+            // Dispose the progress dialog
+            progressDialog.dispose();
+
+            // Show an error dialog
+            JOptionPane.showMessageDialog(this, "Failed to execute command!", BeamerController.APP_NAME, JOptionPane.ERROR_MESSAGE);
+
+            // Print an error to the console
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Run a custom command, that the user enters.
+     */
+    public void runCustomCommand() {
+        // Let the user enter a command
+        String command = JOptionPane.showInputDialog(this, "Enter a command:", BeamerController.APP_NAME, JOptionPane.INFORMATION_MESSAGE);
+
+        // Make sure a command is entered
+        if(command == null || command.trim().length() == 0)
+            return;
+
+        // Create a new command instance for this custom command
+        Command customCommand = new Command("customCommand", command, CommandType.WRITE, command);
+
+        // Execute the command
+        runCommand(customCommand);
     }
 }
