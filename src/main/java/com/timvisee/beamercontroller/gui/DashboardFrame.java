@@ -191,8 +191,19 @@ public class DashboardFrame extends JFrame {
         // Add the button panel to the main panel
         c.gridx = 0;
         c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
         c.fill = GridBagConstraints.BOTH;
         mainPanel.add(buttonPanel, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 1;
+        c.weighty = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(16, 0, 0, 0);
+        mainPanel.add(new JLabel("<html><font color='gray'><b>Note:</b> This is an early prototype, and still an unfinished product.<br />" +
+                "The application is currently in pre-alpha stage and is still<br />prone to bugs, glitches and other unwanted behaviour.</font></html>"), c);
 
         // Create a simple menu bar
         JMenuBar menuBar = new JMenuBar();
