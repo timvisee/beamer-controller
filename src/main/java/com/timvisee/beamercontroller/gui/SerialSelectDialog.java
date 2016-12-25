@@ -22,6 +22,7 @@
 
 package com.timvisee.beamercontroller.gui;
 
+import com.timvisee.beamercontroller.App;
 import com.timvisee.beamercontroller.BeamerController;
 import jssc.SerialPortList;
 
@@ -141,13 +142,7 @@ public class SerialSelectDialog extends JDialog {
         });
 
         // Quit the application when the quit button is pressed
-        quitButton.addActionListener(e -> {
-            // Show a status message
-            System.out.println("Application will now quit.");
-
-            // Quit
-            System.exit(0);
-        });
+        quitButton.addActionListener(e -> App.getInstance().exit());
 
         // Add the buttons to the button panel
         buttonPanel.add(okButton);

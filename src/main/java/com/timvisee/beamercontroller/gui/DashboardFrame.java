@@ -22,6 +22,7 @@
 
 package com.timvisee.beamercontroller.gui;
 
+import com.timvisee.beamercontroller.App;
 import com.timvisee.beamercontroller.BeamerController;
 import com.timvisee.beamercontroller.beamer.Beamer;
 import com.timvisee.beamercontroller.beamer.command.Command;
@@ -34,6 +35,8 @@ import jssc.SerialPortException;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class DashboardFrame extends JFrame {
 
@@ -89,6 +92,39 @@ public class DashboardFrame extends JFrame {
 
         // Pack the frame
         pack();
+
+        // Set the close method
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        // Listen for close
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                // Dispose the frame
+                dispose();
+
+                // Properly exit the application
+                App.getInstance().exit();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+
+            @Override
+            public void windowActivated(WindowEvent e) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
         // Get the current dialog size
         final Dimension size = getSize();
@@ -212,7 +248,7 @@ public class DashboardFrame extends JFrame {
         beamerMenu.add(commandItem);
         beamerMenu.addSeparator();
         JMenuItem exitItem = new JMenuItem("Exit");
-        exitItem.addActionListener(e -> System.exit(0));
+        exitItem.addActionListener(e -> App.getInstance().exit());
         beamerMenu.add(exitItem);
         menuBar.add(beamerMenu);
         JMenu helpMenu = new JMenu("Help");

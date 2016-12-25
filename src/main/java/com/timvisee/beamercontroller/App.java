@@ -162,4 +162,15 @@ public class App {
             System.exit(0);
         }
     }
+
+    /**
+     * (Force) exit the application.
+     */
+    public void exit() {
+        // Show a status message
+        System.out.println("The application will now exit.");
+
+        // Exit
+        System.exit(0);
+    }
 }
