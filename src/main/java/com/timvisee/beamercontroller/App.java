@@ -53,7 +53,7 @@ public class App {
      * Baud rate to use.
      */
     // TODO: This should be removed. This is used for a rapid release snapshot.
-    public int baud = 115200;
+    public int baud = 9600;
 
     /**
      * Constructor.
