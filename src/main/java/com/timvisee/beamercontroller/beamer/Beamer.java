@@ -119,4 +119,9 @@ public class Beamer {
         // Return the beamer instance
         return beamer;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

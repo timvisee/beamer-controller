@@ -25,6 +25,7 @@ package com.timvisee.beamercontroller;
 import com.timvisee.beamercontroller.beamer.Beamer;
 import com.timvisee.beamercontroller.beamer.BeamerManager;
 import com.timvisee.beamercontroller.beamer.iface.SerialBeamerInterface;
+import com.timvisee.beamercontroller.gui.ConnectDialog;
 import com.timvisee.beamercontroller.gui.DashboardFrame;
 import com.timvisee.beamercontroller.gui.SerialSelectDialog;
 import com.timvisee.beamercontroller.serial.BaudRateType;
@@ -86,6 +87,9 @@ public class App {
 
         // Use systems look and feel
         SwingUtils.useNativeLookAndFeel();
+
+        // Show the connection dialog
+        ConnectDialog.showDialog();
 
         // Make sure enough serial ports are available
         if(SerialPortList.getPortNames().length == 0) {
@@ -172,5 +176,14 @@ public class App {
 
         // Exit
         System.exit(0);
+    }
+
+    /**
+     * Get the beamer manager.
+     *
+     * @return Beamer manager.
+     */
+    public BeamerManager getBeamerManager() {
+        return beamerManager;
     }
 }
