@@ -9,7 +9,7 @@ public class ProfileSelectComponent extends AdvancedComboComponent<String> {
      * Constructor.
      */
     public ProfileSelectComponent() {
-        super(true);
+        super(true, true);
 
         // Set the dummy values
         setValues(new ArrayList<String>() {{

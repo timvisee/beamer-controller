@@ -19,9 +19,10 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
     /**
      * Constructor.
      */
-    AdvancedComboComponent(boolean moreButton) {
+    AdvancedComboComponent(boolean moreButton, boolean allowAny) {
         // Build the combo box
         comboBox = new JComboBox<>();
+        comboBox.setEditable(allowAny);
 
         // Build the more button
         if(moreButton)
@@ -102,5 +103,14 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
      */
     public void setValues(List<E> values) {
         setValues((E[]) values.toArray());
+    }
+
+    /**
+     * Check whether any value is allowed by the user.
+     *
+     * @return True if any value is allowed, false if not.
+     */
+    public boolean isAllowAny() {
+        return comboBox.isEditable();
     }
 }

@@ -9,7 +9,7 @@ public class BeamerTypeSelectComponent extends AdvancedComboComponent<Beamer> {
      * Constructor.
      */
     public BeamerTypeSelectComponent() {
-        super(true);
+        super(true, false);
 
         // Set the values
         setValues(App.getInstance().getBeamerManager().getBeamers());
