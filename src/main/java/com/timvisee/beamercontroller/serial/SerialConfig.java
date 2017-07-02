@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) Tim Visee 2016. All rights reserved.                         *
+ * Copyright (c) Tim Visee 2016-2017. All rights reserved.                    *
  *                                                                            *
  * @author Tim Visee                                                          *
  *                                                                            *
@@ -21,7 +21,7 @@
 
 package com.timvisee.beamercontroller.serial;
 
-import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+import com.timvisee.yamlwrapper.ConfigurationSection;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 

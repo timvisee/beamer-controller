@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) Tim Visee 2016. All rights reserved.                         *
+ * Copyright (c) Tim Visee 2016-2017. All rights reserved.                    *
  *                                                                            *
  * @author Tim Visee                                                          *
  *                                                                            *

@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) Tim Visee 2016. All rights reserved.                         *
+ * Copyright (c) Tim Visee 2016-2017. All rights reserved.                    *
  *                                                                            *
  * @author Tim Visee                                                          *
  *                                                                            *
@@ -22,7 +22,7 @@
 package com.timvisee.beamercontroller.beamer.command;
 
 import com.timvisee.beamercontroller.serial.SerialConfig;
-import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+import com.timvisee.yamlwrapper.ConfigurationSection;
 
 public class BeamerSerialConfig {
 
