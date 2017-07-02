@@ -116,12 +116,20 @@
         </plugins>
     </build>
 
+    <repositories>
+        <!-- Xephi repository, for YAML wrapper -->
+        <repository>
+            <id>xephi-repo</id>
+            <url>http://ci.xephi.fr/plugin/repository/everything/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
-        <!-- YAML library -->
+        <!-- YAML wrapper library -->
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.17</version>
+            <groupId>com.timvisee</groupId>
+            <artifactId>yamlwrapper</artifactId>
+            <version>LATEST</version>
         </dependency>
 
         <!-- jSSC library -->
