@@ -23,6 +23,8 @@ package com.timvisee.beamercontroller.gui.component;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public abstract class AdvancedComboComponent<E> extends JPanel {
@@ -43,6 +45,11 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
     private List<Runnable> changeListeners;
 
     /**
+     * Basic more listener, runnables are called when the more button is invoked.
+     */
+    private List<Runnable> moreListeners;
+
+    /**
      * Constructor.
      */
     AdvancedComboComponent(boolean moreButton, boolean allowAny) {
@@ -50,9 +57,28 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
         comboBox = new JComboBox<>();
         comboBox.setEditable(allowAny);
 
-        // Build the more button
-        if(moreButton)
+        // Link the change listeners
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                // Invoke the change listeners
+                invokeChangeListeners();
+            }
+        });
+
+        if(moreButton) {
+            // Build the more button
             this.moreButton = new JButton("...");
+
+            // Link the more listeners
+            this.moreButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    // Invoke the more listeners
+                    invokeMoreListeners();
+                }
+            });
+        }
 
         // Build the component UI
         buildUi();
@@ -155,5 +181,22 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
     private void invokeChangeListeners() {
         for (Runnable changeListener : changeListeners)
             changeListener.run();
+    }
+
+    /**
+     * Add the given more listener.
+     *
+     * @param runnable Runnable.
+     */
+    public void registerMoreListener(Runnable runnable) {
+        moreListeners.add(runnable);
+    }
+
+    /**
+     * Invoke all the registered more listeners.
+     */
+    private void invokeMoreListeners() {
+        for (Runnable moreListener : moreListeners)
+            moreListener.run();
     }
 }
