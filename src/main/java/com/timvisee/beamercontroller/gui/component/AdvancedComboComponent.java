@@ -38,6 +38,11 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
     private JButton moreButton = null;
 
     /**
+     * Basic change listener, runnables are called when the field is changed.
+     */
+    private List<Runnable> changeListeners;
+
+    /**
      * Constructor.
      */
     AdvancedComboComponent(boolean moreButton, boolean allowAny) {
@@ -133,5 +138,22 @@ public abstract class AdvancedComboComponent<E> extends JPanel {
      */
     public boolean isAllowAny() {
         return comboBox.isEditable();
+    }
+
+    /**
+     * Add the given change listener.
+     *
+     * @param runnable Runnable.
+     */
+    public void registerChangeListener(Runnable runnable) {
+        changeListeners.add(runnable);
+    }
+
+    /**
+     * Invoke all the registered change listeners.
+     */
+    private void invokeChangeListeners() {
+        for (Runnable changeListener : changeListeners)
+            changeListener.run();
     }
 }
